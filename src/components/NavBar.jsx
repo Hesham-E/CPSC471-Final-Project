@@ -1,13 +1,18 @@
-import React from 'react';
-import "./NavBar.css"
+import React, { Component } from "react";
 
-function NavBar(props) {
-  return (
-    <div>
-      <h2 className="nav-bar">Our Trips</h2>
-      <button className='button'>Click Me</button>
-    </div>
-  );
+class NavBar extends Component {
+  render() {
+    return (
+      <nav className="navbar navbar-dark bg-dark">
+        <span className="navbar-brand" style={{ color: "Lavender" }}>
+          Our Trips
+        </span>
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+          Log In
+        </button>
+      </nav>
+    );
+  }
 }
 
 export default NavBar;

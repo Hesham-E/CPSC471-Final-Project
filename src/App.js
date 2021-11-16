@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import NavBar from "./components/NavBar";
+import HomePage from './components/HomePage';
+import NavigationBar from "./components/NavigationBar";
 
 
 class App extends Component {
   render() {
     return (<React.Fragment>
-      <NavBar />
-
+      <NavigationBar />
+      <HomePage />
     </React.Fragment>);
   }
 

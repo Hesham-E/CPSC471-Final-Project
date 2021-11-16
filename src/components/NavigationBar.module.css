@@ -1,0 +1,18 @@
+.brandName {
+    color: palegoldenrod;
+    font-size: x-large;
+
+    float: none;
+    text-align: center;
+    justify-content: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.right {
+    display: inline-block;
+    justify-content: right;
+}

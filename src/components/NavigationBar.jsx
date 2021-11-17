@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
 
@@ -16,7 +16,10 @@ class NavigationBar extends Component {
           <Link to="/" className={styles.navLinks}>
             Home
           </Link>
-          <Link to="/" className={styles.navLinks}>
+          <Link to="/events" className={styles.navLinks}>
+            Events
+          </Link>
+          <Link to="/account" className={styles.navLinks}>
             My Account
           </Link>
           </div>

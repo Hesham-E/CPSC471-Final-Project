@@ -1,9 +1,14 @@
 .brandName {
     color: palegoldenrod;
     font-size: x-large;
+    text-align: left;
     padding-left: 7px;
 }
 
 .navLinks {
+    color: paleturquoise;
     float: right;
+    margin-left: 80%;
+    text-decoration: none;
+    justify-content: right;
 }

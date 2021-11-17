@@ -1,35 +1,29 @@
 import React, { Component } from "react";
-import { Nav, Navbar} from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
 
 class NavigationBar extends Component {
   render() {
     return (
-      <Navbar className="navbar navbar-dark bg-secondary">
-
-        <Nav.Item className="col">
-          <Navbar.Text  bsPrefix={styles.brandName}>
+      <Nav className="navbar navbar-dark bg-secondary">
+        <div className="container-fluid">
+          <h1 className={styles.brandName}>
             Our Trips
-          </Navbar.Text>
-        </Nav.Item>
+          </h1>
 
-        <Nav bsPrefix={styles.navLinks}>
-          <Nav.Item>
-            <Nav.Link href="/home">
-              Home
-            </Nav.Link>
-          </Nav.Item>
+          <div>
+          <Link to="/" className={styles.navLinks}>
+            Home
+          </Link>
+          <Link to="/" className={styles.navLinks}>
+            My Account
+          </Link>
+          </div>
+         
+        </div>
 
-          <Nav.Item>
-            <Nav.Link href="/account">
-              My Account
-            </Nav.Link>
-          </Nav.Item>
-
-
-        </Nav>
-
-      </Navbar>
+      </Nav>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar} from "react-bootstrap";
 import styles from "./NavigationBar.module.css";
 
 class NavigationBar extends Component {
@@ -7,17 +7,26 @@ class NavigationBar extends Component {
     return (
       <Navbar className="navbar navbar-dark bg-secondary">
 
-        <Navbar.Text bsPrefix={styles.brandName}>
-          Our Trips
-        </Navbar.Text>
+        <Nav.Item className="col">
+          <Navbar.Text  bsPrefix={styles.brandName}>
+            Our Trips
+          </Navbar.Text>
+        </Nav.Item>
 
-        <Nav bsPrefix={styles.right}>
-          <Nav.Link href="/home">
-            Home
-          </Nav.Link>
-          <Nav.Link>
-            My Account
-          </Nav.Link>
+        <Nav bsPrefix={styles.navLinks}>
+          <Nav.Item>
+            <Nav.Link href="/home">
+              Home
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link href="/account">
+              My Account
+            </Nav.Link>
+          </Nav.Item>
+
+
         </Nav>
 
       </Navbar>

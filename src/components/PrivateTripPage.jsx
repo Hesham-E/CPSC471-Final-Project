@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class PrivateEventPage extends Component {
+class PrivateTripPage extends Component {
     render () {
         return (
             <div>
-                Create and manage private events here.
+                Create and manage private Trips here.
             </div>
         );
     }
 }
 
-export default PrivateEventPage
+export default PrivateTripPage

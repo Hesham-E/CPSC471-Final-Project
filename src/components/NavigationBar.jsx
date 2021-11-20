@@ -16,8 +16,11 @@ class NavigationBar extends Component {
           <Link to="/" className={styles.navLinks}>
             Home
           </Link>
-          <Link to="/events" className={styles.navLinks}>
-            Events
+          <Link to="/publicevents" className={styles.navLinks}>
+            Public Events
+          </Link>
+          <Link to="/privateevents" className={styles.navLinks}>
+            Private Events
           </Link>
           <Link to="/account" className={styles.navLinks}>
             My Account

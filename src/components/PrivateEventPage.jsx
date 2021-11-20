@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class EventPage extends Component {
+class PrivateEventPage extends Component {
     render () {
         return (
             <div>
-                
+                Create and manage private events here.
             </div>
         );
     }
 }
 
-export default EventPage
+export default PrivateEventPage

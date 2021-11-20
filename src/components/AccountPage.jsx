@@ -72,9 +72,6 @@ class AccountPage extends Component {
                         <Route path="/" element={notModifiying(this.props)} />
                         <Route path="/edit" element={modifying(this.props)} />
                     </Routes>
-
-
-
                 </Stack>
             </div>
 

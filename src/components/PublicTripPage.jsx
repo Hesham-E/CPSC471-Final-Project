@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class PublicEventPage extends Component {
+class PublicTripPage extends Component {
     render () {
         return (
             <div>
-                Any Public Events Listed here
+                Any Public Trips Listed here
             </div>
         );
     }
 }
 
-export default PublicEventPage
+export default PublicTripPage

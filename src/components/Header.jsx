@@ -1,22 +1,21 @@
 import SideBar from "./SideBar";
 import styles from "./Header.module.css";
-const travelPicture = require("../pictures/travelPicture.png");
+import travelPicture from "../pictures/travelPicture.png";
 
-const NavigationBar = () => {
+const Header = () => {
   return (
-    <div>
-      <div className={styles.header}>
-        <SideBar></SideBar>
-        <span className={styles.title}>Name goes here</span>
-      </div>
-      <img
+    <div className={styles.head}>
+      <div
         className={styles.overlay}
-        // style={{ background: `url(${travelPicture})` }}
-        alt="travelPicture"
-        src={travelPicture}
-      />
+        style={{ backgroundImage: `url(${travelPicture})` }}
+      >
+        <div className={styles.header}>
+          <SideBar />
+          <span className={styles.title}>Name goes here</span>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default NavigationBar;
+export default Header;

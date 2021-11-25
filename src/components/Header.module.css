@@ -1,8 +1,17 @@
+.head {
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  min-height: 300px;
+}
+
 .title {
   font-size: 96px;
   font-weight: 400;
   font-family: "Roboto";
-  line-height: 112px;
+  line-height: 160px;
+  color: black;
+  margin-right: 5%;
 }
 
 .header {

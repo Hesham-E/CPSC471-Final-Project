@@ -1,0 +1,31 @@
+.div3 {
+  background: #e9c46a;
+  display: flex;
+  padding: 11px 12px;
+  margin: 18px 0px 90px 0px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.div4 {
+  display: flex;
+  gap: 44px;
+  padding: 0px;
+  margin: 10px 58px 0px 184px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.img1 {
+  width: 300px;
+  height: 300px;
+}
+
+.span7 {
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Roboto";
+  line-height: 28px;
+}

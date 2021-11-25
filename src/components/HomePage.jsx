@@ -1,9 +1,10 @@
+import HomeBody from "./HomeBody";
 import styles from "./HomePage.module.css";
 
 const HomePage = () => {
   return (
     <div className={styles.welcomeMessage}>
-      <span>Hello! Welcome to Our Trips.</span>
+      <HomeBody />
     </div>
   );
 };

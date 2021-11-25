@@ -1,13 +1,14 @@
-.span-1 {
+.navLinks {
   font-size: 24px;
   font-weight: 400;
   font-family: "Roboto";
   line-height: 28px;
 }
 
-.div-1 {
+.sideBar {
   background: #f4a261;
   display: flex;
+  width: 130px;
   gap: 48px;
   padding: 19px 6px;
   flex-direction: column;

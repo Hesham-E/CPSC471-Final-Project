@@ -1,30 +1,21 @@
-import { Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import styles from "./NavigationBar.module.css";
+import SideBar from "./SideBar";
+import styles from "./Header.module.css";
+const travelPicture = require("../pictures/travelPicture.png");
 
 const NavigationBar = () => {
   return (
-    // <Nav className="navbar navbar-dark bg-secondary">
-    // <div className="container-fluid">
-
-    {
-      /*<div>
-          <Link to="/" className={styles.navLinks}>
-            Home
-          </Link>
-          <Link to="/publictrips" className={styles.navLinks}>
-            Public Trips
-          </Link>
-          <Link to="/privatetrips" className={styles.navLinks}>
-            Private Trips
-          </Link>
-          <Link to="/account" className={styles.navLinks}>
-            My Account
-          </Link>
-        </div>*/
-    }
-    // </div>
-    // </Nav>
+    <div>
+      <div className={styles.header}>
+        <SideBar></SideBar>
+        <span className={styles.title}>Name goes here</span>
+      </div>
+      <img
+        className={styles.overlay}
+        // style={{ background: `url(${travelPicture})` }}
+        alt="travelPicture"
+        src={travelPicture}
+      />
+    </div>
   );
 };
 

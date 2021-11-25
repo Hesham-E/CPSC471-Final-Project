@@ -4,11 +4,11 @@ import styles from "./NavigationBar.module.css";
 
 const NavigationBar = () => {
   return (
-    <Nav className="navbar navbar-dark bg-secondary">
-      <div className="container-fluid">
-        <h1 className={styles.brandName}>Our Trips</h1>
+    // <Nav className="navbar navbar-dark bg-secondary">
+    // <div className="container-fluid">
 
-        <div>
+    {
+      /*<div>
           <Link to="/" className={styles.navLinks}>
             Home
           </Link>
@@ -21,9 +21,10 @@ const NavigationBar = () => {
           <Link to="/account" className={styles.navLinks}>
             My Account
           </Link>
-        </div>
-      </div>
-    </Nav>
+        </div>*/
+    }
+    // </div>
+    // </Nav>
   );
 };
 

@@ -1,9 +1,0 @@
-.page {
-  background: #287271;
-  display: flex;
-  gap: 19px;
-  margin-top: -1px;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: stretch;
-}

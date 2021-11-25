@@ -1,13 +1,5 @@
-import React, { Component } from 'react';
+const PrivateTripPage = () => {
+  return <div>Create and manage private Trips here.</div>;
+};
 
-class PrivateTripPage extends Component {
-    render () {
-        return (
-            <div>
-                Create and manage private Trips here.
-            </div>
-        );
-    }
-}
-
-export default PrivateTripPage
+export default PrivateTripPage;

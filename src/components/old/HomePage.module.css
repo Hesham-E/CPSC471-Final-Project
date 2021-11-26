@@ -1,0 +1,5 @@
+.welcomeMessage {
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+}

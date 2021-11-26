@@ -11,7 +11,7 @@ const HeaderAccount = () => {
       >
         <div className={styles.header}>
           <SideBar />
-          <span className={styles.title}>ETIENNEL</span>
+          <span className={styles.title}>SOME USER</span>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import Header from "../account/HeaderAccount";
-import Event from "./EventCard";
+import EventCard from "./EventCard";
+import Button from "../parts/Button";
 import styles from "./EventList.module.css";
 
 const EventList = () => {
@@ -7,12 +8,15 @@ const EventList = () => {
     <div>
       <Header />
       <div className={styles.mainDiv}>
-        <span className={styles.text1}>Event List</span>
-        <Event />
-        <Event />
-        <Event />
-        <Event />
-        <Event />
+        <div className={styles.alignDiv}>
+          <span className={styles.text1}>Event List</span>
+          <Button />
+        </div>
+        <EventCard />
+        <EventCard />
+        <EventCard />
+        <EventCard />
+        <EventCard />
       </div>
     </div>
   );

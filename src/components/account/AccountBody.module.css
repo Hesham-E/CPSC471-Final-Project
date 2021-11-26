@@ -1,9 +1,16 @@
-.text1 {
+.body {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.text1 {
   font-size: 58px;
   font-weight: 200;
   font-family: "Roboto";
   line-height: 80px;
   color: white;
   margin-left: 42%;
+  width: 550px;
 }

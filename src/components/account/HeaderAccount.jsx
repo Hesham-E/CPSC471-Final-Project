@@ -11,7 +11,7 @@ const HeaderAccount = () => {
       >
         <div className={styles.header}>
           <SideBar />
-          <span className={styles.title}>ETIENNEL321</span>
+          <span className={styles.title}>ETIENNEL</span>
         </div>
       </div>
     </div>

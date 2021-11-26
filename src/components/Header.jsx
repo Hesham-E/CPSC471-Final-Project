@@ -1,6 +1,6 @@
 import SideBar from "./SideBar";
 import styles from "./Header.module.css";
-import travelPicture from "../pictures/travelPicture.png";
+import travelPicture from "../pictures/travel.png";
 
 const Header = (props) => {
   return (

@@ -10,7 +10,7 @@
   font-weight: 400;
   font-family: "Roboto";
   line-height: 160px;
-  color: black;
+  color: white;
   margin-right: 5%;
 }
 
@@ -30,4 +30,5 @@
   top: 0;
   left: 0;
   width: 100%;
+  object-fit: cover;
 }

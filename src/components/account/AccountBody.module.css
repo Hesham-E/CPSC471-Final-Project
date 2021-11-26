@@ -1,0 +1,9 @@
+.text1 {
+  display: flex;
+  font-size: 58px;
+  font-weight: 200;
+  font-family: "Roboto";
+  line-height: 80px;
+  color: white;
+  margin-left: 42%;
+}

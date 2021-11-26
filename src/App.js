@@ -1,8 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import AccountPage from "./components/AccountPage";
+import AccountPage from "./components/account/AccountPage";
 import HomePage from "./components/HomePage";
-import Header from "./components/Header";
 import PrivateTripPage from "./components/PrivateTripPage";
 import PublicTripPage from "./components/PublicTripPage";
 import PublicEventsPage from "./components/PublicEventsPage";
@@ -14,7 +13,10 @@ const App = () => {
   return (
     <React.Fragment>
       <div className={styles.page}>
+<<<<<<< HEAD
        
+=======
+>>>>>>> d165edc3... created header and side bar for account page
         <Routes>
           <Route path="/" element={<div><Header title="Name goes here"/><HomePage /></div>} />
           <Route path="/account/*" element={<AccountPage />} />

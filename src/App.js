@@ -2,10 +2,10 @@ import React from "react";
 import { Route, Routes } from "react-router";
 import AccountPage from "./components/account/AccountPage";
 import InvitePage from "./components/account/invite/InvitePage";
-import Events from "./components/events/EventPage";
+import Event from "./components/events/EventPage";
 import EventList from "./components/events/EventList";
 import NewEvent from "./components/events/NewEvent";
-import Trips from "./components/trips/TripPage";
+import Trip from "./components/trips/TripPage";
 import TripList from "./components/trips/TripList";
 import NewTrip from "./components/trips/NewTrip";
 import HomePage from "./components/HomePage";
@@ -21,10 +21,10 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/account/*" element={<AccountPage />} />
           <Route path="/account/invite" element={<InvitePage />} />
-          <Route path="/account/events" element={<Events />} />
+          <Route path="/account/event" element={<Event />} />
           <Route path="/account/eventlist" element={<EventList />} />
           <Route path="/account/newevent" element={<NewEvent />} />
-          <Route path="/account/trips" element={<Trips />} />
+          <Route path="/account/trip" element={<Trip />} />
           <Route path="/account/triplist" element={<TripList />} />
           <Route path="/account/newtrip" element={<NewTrip />} />
           <Route path="/publictrips/*" element={<PublicTripPage />} />

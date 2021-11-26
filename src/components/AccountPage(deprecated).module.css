@@ -1,17 +1,11 @@
-.welcomeMessage {
-    display: flex;
-    justify-content: center;
-    font-size: larger;
-}
+import styles from "./temp.module.css";
 
-.infoStack {
-    display: flex;
-    justify-content: center;
-}
+const temp = () => {
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
+};
 
-.accountLabels {
-    text-align: left;
-}
-.accountInfo {
-    text-align: right;
-}
+export default temp;

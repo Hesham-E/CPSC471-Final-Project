@@ -4,7 +4,7 @@ import Body from "./AccountBody";
 
 const AccountPage = () => {
   return (
-    <div>
+    <div className={styles.body}>
       <Header />
       <Body />
     </div>

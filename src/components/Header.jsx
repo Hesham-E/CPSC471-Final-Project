@@ -1,6 +1,6 @@
 import SideBar from "./SideBar";
 import styles from "./Header.module.css";
-import travelPicture from "../pictures/travelPicture.png";
+import travelPicture from "../pictures/travel.png";
 
 const Header = () => {
   return (
@@ -11,7 +11,7 @@ const Header = () => {
       >
         <div className={styles.header}>
           <SideBar />
-          <span className={styles.title}>Name goes here</span>
+          <span className={styles.title}>BIT EVENT</span>
         </div>
       </div>
     </div>

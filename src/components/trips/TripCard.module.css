@@ -42,11 +42,11 @@
 }
 
 .container {
-  background: #30aa9b;
+  background: #b5d63c;
   border-radius: 4px;
   border-color: black;
   display: flex;
-  max-width: 550px;
+  max-width: 850px;
   max-height: 400px;
   gap: 4px;
   padding: 7px 1px;

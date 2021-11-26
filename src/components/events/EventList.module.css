@@ -8,6 +8,14 @@
   margin-left: 130px;
 }
 
+.alignDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 420px;
+  align-items: center;
+}
+
 .text1 {
   font-size: 38px;
   font-weight: 400;

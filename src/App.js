@@ -5,9 +5,9 @@ import InvitePage from "./components/account/invite/InvitePage";
 import Events from "./components/events/EventPage";
 import EventList from "./components/events/EventList";
 import NewEvent from "./components/events/NewEvent";
-// import Trips from "./components/trips/TripPage";
-// import TripList from "./components/trips/TripList";
-// import NewTrip from "./components/trips/NewTrip";
+import Trips from "./components/trips/TripPage";
+import TripList from "./components/trips/TripList";
+import NewTrip from "./components/trips/NewTrip";
 import HomePage from "./components/HomePage";
 import PrivateTripPage from "./components/PrivateTripPage";
 import PublicTripPage from "./components/PublicTripPage";
@@ -72,9 +72,9 @@ const App = () => {
           <Route path="/account/events" element={<Events />} />
           <Route path="/account/eventlist" element={<EventList />} />
           <Route path="/account/newevent" element={<NewEvent />} />
-          {/* <Route path="/account/tripss" element={<Trips />} />
+          <Route path="/account/trips" element={<Trips />} />
           <Route path="/account/triplist" element={<TripList />} />
-          <Route path="/account/newtrip" element={<NewTrip />} /> */}
+          <Route path="/account/newtrip" element={<NewTrip />} />
           <Route path="/publictrips/*" element={<PublicTripPage />} />
           <Route path="/privatetrips/*" element={<PrivateTripPage />} />
         </Routes>

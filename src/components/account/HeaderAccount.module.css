@@ -1,0 +1,37 @@
+.head {
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  min-height: 100px;
+}
+
+.title {
+  font-size: 72px;
+  font-weight: 400;
+  font-family: "Roboto";
+  line-height: 110px;
+  color: white;
+  margin-right: 5%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.header {
+  display: flex;
+  gap: 340px;
+  padding: 1px 0px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.overlay {
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  object-fit: cover;
+}

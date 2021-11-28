@@ -5,10 +5,10 @@ import styles from "./SideBar.module.css";
 const SideBar = (props) => {
   return (
     <div className={styles.sideBar}>
-      <Link to="/" className={styles.navLinks}>
+      <Link to="/LoginPage" className={styles.navLinks}>
         Login
       </Link>
-      <Link to="/" className={styles.navLinks}>
+      <Link to="/SignUpPage" className={styles.navLinks}>
         Sign Up
       </Link>
       <Link to="/" className={styles.navLinks}>

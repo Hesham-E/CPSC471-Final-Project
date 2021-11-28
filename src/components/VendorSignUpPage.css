@@ -1,0 +1,56 @@
+.vendor-sign-up {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.background-rectangle {
+  background: #287271;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+.page-title {
+  text-align: center;
+  vertical-align: top;
+  font-size: 48px;
+  font-family: Roboto;
+  line-height: auto;
+  color: #ffffff;
+}
+.question-bar {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+}
+.form-field {
+  margin: auto;
+  height: 49px;
+  width: 50%;
+  background-color: #31dec9;
+}
+.question-title {
+  text-align: center;
+  vertical-align: top;
+  font-size: 36px;
+  font-family: Roboto;
+  line-height: auto;
+  color: #ffffff;
+}
+.button-border {
+  margin: auto;
+  border-radius: 42.5px;
+  height: 85px;
+  width: 25%;
+  background-color: #e9c46a;
+}
+.button-text {
+  text-align: center;
+  vertical-align: top;
+  font-size: 46px;
+  font-family: Roboto;
+  line-height: auto;
+  color: #000000;
+  text-decoration: none;
+}

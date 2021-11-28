@@ -4,7 +4,7 @@ import image2 from "../pictures/image2.png";
 
 const HomeBody = () => {
   return (
-    <div>
+    <div className={styles.tall}>
       <div className={styles.div4}>
         <div className={styles.div3}>
           <span className={styles.span7}>

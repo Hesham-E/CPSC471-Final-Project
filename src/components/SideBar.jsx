@@ -11,7 +11,7 @@ const SideBar = (props) => {
       <Link to="/SignUpPage" className={styles.navLinks}>
         Sign Up
       </Link>
-      <Link to="/" className={styles.navLinks}>
+      <Link to="/PublicEventsPage" className={styles.navLinks}>
         Public Events
       </Link>
       <Link to="/" className={styles.navLinks}>

@@ -483,6 +483,384 @@ app.delete('/api/event/locations/:eventID', (req, res) => {
 });
 
 
+//EVENT_VENDOR_CREATES TABLE API COMMANDS
+app.get('/api/event/vendor', (req, res) => {
+    const sqlInsert = "SELECT Event_ID FROM Event_Vendor_Creates";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/event/vendor/:vendorID', (req, res) => {
+    const sqlInsert = "SELECT Event_ID FROM Event_Vendor_Creates WHERE Vendor_ID = ?";
+    db.query(sqlInsert, [req.params.vendorID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/event/:eventID/vendor', (req, res) => {
+    const sqlInsert = "SELECT Vendor_ID FROM Event_Vendor_Creates WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/event/vendor/:vendorID/:eventID', (req, res) => {
+    const sqlInsert = "INSERT INTO Event_Vendor_Creates(Event_ID, Vendor_ID) VALUES (?, ?)";
+    db.query(sqlInsert, [req.params.eventID, req.params.vendorID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/event/vendor/:eventID', (req, res) => {
+    const sqlInsert = "DELETE FROM Event_Vendor_Creates WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Deleted successfully");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/event/vendor/:vendorID', (req, res) => {
+    const sqlInsert = "DELETE FROM Event_Vendor_Creates WHERE Vendor_ID = ?";
+    db.query(sqlInsert, [req.params.vendorID], (err, result => {
+        if (!err)
+        {
+            console.log("Deleted successfully");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//PRIVATE_EVENT TABLE API COMMANDS
+app.get('/api/event/private', (req, res) => {
+    const sqlInsert = "SELECT Event_ID FROM Private_Event";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/event/private/:eventID', (req, res) => {
+    const sqlInsert = "SELECT COUNT(*) FROM Private_Event WHERE Event_ID = ?";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/event/private', (req, res) => {
+    const eventID = req.body.eventID;
+    const sqlInsert = "INSERT INTO Private_Event (Event_ID) VALUES (?)";
+    db.query(sqlInsert, [eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/event/private/:eventID', (req, res) => {
+    const sqlInsert = " DELETE FROM Private_Event WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Deleted successfully");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//TRANSACTIONS TABLE API COMMANDS
+app.get('/api/transactions', (req, res) => {
+    const sqlInsert = "SELECT * FROM Transactions";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/transactions/:transactionID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Transactions WHERE Transaction_ID = ?";
+    db.query(sqlInsert, [req.params.transactionID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/transactions/:payeeID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Transactions WHERE Payee_ID = ?";
+    db.query(sqlInsert, [req.params.payeeID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/transactions/vendor', (req, res) => {
+    const sqlInsert = "SELECT * FROM Transactions WHERE Is_vendor_purchase = 1";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/transactions', (req, res) => {
+    const payeeID = req.body.payeeID;
+    const price = req.body.price;
+    const date = req.body.date;
+    const time = req.body.time;
+    const isVendorPurchase = req.body.isVendorPurchase;
+
+    const sqlInsert = "INSERT INTO Transactions (Payee_ID, Price, Date, Time, Is_vendor_purchase) OUTPUT Inserted.Transaction_ID VALUES (?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [payeeID, price, date, time, isVendorPurchase], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/transactions/:transactionID', (req, res) => {
+    const sqlInsert = "DELETE FROM Transactions WHERE Transaction_ID = ?";
+    db.query(sqlInsert, [req.params.transactionID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//PUBLIC_EVENTS_PAID_FOR TABLE API COMMANDS
+app.get('/api/event/public', (req, res) => {
+    const sqlInsert = "SELECT Event_ID FROM Public_Events_Paid_For";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/event/public/:eventID', (req, res) => {
+    const sqlInsert = "SELECT COUNT(*) FROM Public_Events_Paid_For WHERE Event_ID =  ?";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/event/public/user/:userID', (req, res) => {
+    const sqlInsert = "SELECT Event_ID FROM Public_Events_Paid_For WHERE Owner_ID = ?";
+    db.query(sqlInsert, [req.params.userID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/event/public/:eventID', (req, res) => {
+    const eventID = req.params.eventID;
+    const transactionID = req.body.transactionID;
+    const ownerID = req.body.ownerID;
+
+    const sqlInsert = "INSERT INTO Public_Events_Paid_For (Event_ID, Transaction_ID, Owner_ID) VALUES (?, ?, ?)";
+    db.query(sqlInsert, [eventID, transactionID, ownerID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/event/public/:eventID', (req, res) => {
+    const sqlInsert = "DELETE FROM Public_Events_Paid_For WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/event/public/user/:ownerID', (req, res) => {
+    const sqlInsert = "DELETE FROM Public_Events_Paid_For WHERE Owner_ID = ?";
+    db.query(sqlInsert, [req.params.ownerID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//RECEIPT TABLE API COMMANDS
+app.get('/api/receipt/:receiptID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Receipt WHERE Receipt_ID = ?";
+    db.query(sqlInsert, [req.params.receiptID] (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/receipt/transaction/:transactionID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Receipt WHERE Transaction_ID = ?";
+    db.query(sqlInsert, [req.params.transactionID] (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/receipt/ticket/:ticketID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Receipt WHERE Ticket_ID = ?";
+    db.query(sqlInsert, [req.params.ticketID] (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/receipt/account/:accountID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Receipt WHERE Account_ID = ?";
+    db.query(sqlInsert, [req.params.accountID] (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/receipt', (req, res) => {
+    const message = req.body.message;
+    const transactionID = req.body.transactionID;
+    const ticketID = req.body.ticketID;
+    const accountID = req.body.accountID;
+
+    const sqlInsert = "INSERT INTO Receipt (Message, Transaction_ID, Ticket_ID, Account_ID) OUTPUT Inserted.Receipt_ID VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [message, transactionID, ticketID, accountID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/receipt/:receiptID', (req, res) => {
+    const sqlInsert = "DELETE FROM Receipt WHERE Receipt_ID = ?";
+    db.query(sqlInsert, [req.params.receiptID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
 app.listen(3001, () => {
     console.log("Running on port 3001");
 });

@@ -132,7 +132,115 @@ app.put('/api/vendor/:id', (req, res) => {
     }));
 });
 
+//ACCOUNT_TRIP_MODERATES TABLE API COMMANDS
+app.get('/api/moderator', (req, res) => {
+    const sqlSelect = "SELECT ID FROM Account_Trip_Moderates";
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+        console.log(result.data);
+    });
+});
 
+app.get('/api/moderates/:id', (req, res) => {
+    const accountID = req.body.accountID;
+
+    const sqlSelect = "SELECT ID FROM Account_Trip_Moderates WHERE Account_ID = ?";
+    db.query(sqlSelect, [accountID], (err, result) => {
+        res.send(result);
+        console.log(result.data);
+    });
+});
+
+app.post('/api/moderator/:tripID/:accountID', (req, res) => {
+    const accountID = req.body.accountID; //will get these from Axios
+    const tripID = req.body.tripID;
+
+    const sqlInsert = "UPDATE Account_Trip_Moderates SET Account_ID = ? WHERE Trip_ID = ?";
+    db.query(sqlInsert, [accountID, tripID], (err, result => {
+        if (!err)
+            console.log("Successfully added moderator");
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/moderator/:tripID/:accountID', (req, res) => {
+    const sqlSelect = "DELETE FROM Account_Trip_Moderates WHERE Account_ID = ? AND Trip_ID = ?";
+    db.query(sqlSelect, [req.params.accountID, req.params.tripID], (err, result) => {
+        if (!err)
+            console.log("Successfully moderator account: ${req.params.accountID}");
+        else {
+            console.log("Error arose while deleting moderator: ${req.params.accountID}");
+            console.log(err);
+        }
+    });
+});
+
+//TRIP TABLE API COMMANDS
+app.get('/api/trips/:id', (req, res) => {
+    const accountID = req.body.accountID;
+
+    const sqlSelect = "SELECT Trip_ID FROM Trip WHERE Account_ID = ?";
+    db.query(sqlSelect, [accountID], (err, result) => {
+        res.send(result);
+        console.log(result.data);
+    });
+});
+
+app.get('/api/trip/:id', (req, res) => {
+    const tripID = req.body.tripID;
+
+    const sqlSelect = "SELECT Account_ID, Start_Date, End_Date, Start_Location, Destination FROM Trip WHERE Trip_ID = ?";
+    db.query(sqlSelect, [tripID], (err, result) => {
+        res.send(result);
+        console.log(result.data);
+    });
+});
+
+app.post('/api/trip', (req, res) => {
+    const accountID = req.body.accountID; //will get these from Axios
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    const startLocation = req.body.startLocation;
+    const destination = req.body.destination;
+
+    const sqlInsert = "INSERT INTO Trip (Account_ID, Start_Date, End_Date, Start_Location, Destination) OUTPUT Inserted.Trip_ID VALUES (?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [accountID, startDate, endDate, startLocation, destination], (err, result => {
+        if (!err)
+            console.log(result);
+        else
+            console.log(err);
+    }));
+});
+
+app.put('/api/trip/:tripID', (req, res) => {
+    const accountID = req.body.accountID; //will get these from Axios
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    const startLocation = req.body.startLocation;
+    const destination = req.body.destination;
+
+    const sqlInsert = "UPDATE Trip SET Account_ID = ?, Start_Date = ?, End_Date = ?, Start_Location = ?, Destination = ? WHERE Trip_ID = ?";
+    db.query(sqlInsert, [accountID, startDate, endDate, startLocation, destination, req.params.tripID], (err, result => {
+        if (!err)
+            console.log(result);
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/trip/:tripID', (req, res) => {
+    const sqlInsert = "DELETE FROM Trip, Trip_Event_Groups WHERE Trip_ID = ?";
+    db.query(sqlInsert, [req.params.tripID], (err, result => {
+        if (!err)
+            console.log("Deleted trip successfully");
+        else
+            console.log(err);
+    }));
+});
+
+
+//TRIP_LOCATIONS TABLE API COMMANDS
 
 
 app.listen(3001, () => {

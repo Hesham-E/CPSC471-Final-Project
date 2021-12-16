@@ -241,6 +241,246 @@ app.delete('/api/trip/:tripID', (req, res) => {
 
 
 //TRIP_LOCATIONS TABLE API COMMANDS
+app.get('/api/trip/locations/:tripID', (req, res) => {
+    const sqlInsert = "SELECT Location FROM Trip_Locations WHERE Trip_ID = ?";
+    db.query(sqlInsert, [req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/trip/locations/:tripID/:location', (req, res) => {
+    const sqlInsert = "INSERT INTO Trip_Locations (Trip_ID, Location) VALUES (?, ?)";
+    db.query(sqlInsert, [req.params.tripID, req.params.location], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/trip/locations/:tripID/:location', (req, res) => {
+    const sqlInsert = "DELETE FROM Trip_Locations WHERE Location = ? AND Trip_ID = ?";
+    db.query(sqlInsert, [req.params.location, req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted location");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/trip/locations/:tripID', (req, res) => {
+    const sqlInsert = "DELETE FROM Trip_Locations WHERE Trip_ID = ?";
+    db.query(sqlInsert, [req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully all locations from trip");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//TRIP_EVENT_GROUPS TABLE API COMMANDS
+app.get('/api/trip/events/:tripID', (req, res) => {
+    const sqlInsert = "SELECT Event_ID FROM Trip_Event_Groups WHERE Trip_ID = ?";
+    db.query(sqlInsert, [req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/trip/events/:tripID/:eventID', (req, res) => {
+    const sqlInsert = " INSERT INTO Trip_Event_Groups (Event_ID, Trip_ID) VALUES (?, ?)";
+    db.query(sqlInsert, [req.params.eventID, req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/trip/events/:tripID/:eventID', (req, res) => {
+    const sqlInsert = "DELETE FROM Trip_Event_Groups WHERE Event_ID = ? AND Trip_ID = ?";
+    db.query(sqlInsert, [req.params.eventID, req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted event from trip");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/trip/events/:tripID', (req, res) => {
+    const sqlInsert = "DELETE FROM Trip_Event_Groups WHERE Trip_ID = ?";
+    db.query(sqlInsert, [req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted all events from trip");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+
+//EVENT TABLE API COMMANDS
+app.get('/api/event', (req, res) => {
+    const sqlInsert = "SELECT * FROM Event";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/event/:eventID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Event WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/event', (req, res) => {
+    const description = req.body.description; //will get these from Axios
+    const date = req.body.date;
+    const eventName = req.body.eventName;
+    const duration = req.body.duration;
+
+    const sqlInsert = "INSERT INTO Event (Event_Description, Date, Event_Name, Duration) OUTPUT Inserted.Event_ID VALUES (?, ?, ?, ?)";
+    db.query(sqlInsert, [description, date, eventName, duration], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.put('/api/event/:eventID', (req, res) => {
+    const description = req.body.description; //will get these from Axios
+    const date = req.body.date;
+    const eventName = req.body.eventName;
+    const duration = req.body.duration;
+
+    const sqlInsert = "UPDATE Event SET Event_Description= ?, Date= ?, Event_Name= ?, Duration= ? WHERE Event_ID = ?";
+    db.query(sqlInsert, [description, date, eventName, duration, req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/event/:eventID', (req, res) => {
+    const sqlInsert = "DELETE FROM Event WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted event");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//TODO: Link account and event
+app.delete('/api/event/account/:accountID', (req, res) => {
+    const sqlInsert = "DELETE FROM Event WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted event");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+
+//EVENT_LOCATIONS TABLE API COMMANDS
+app.get('/api/event/locations/:eventID', (req, res) => {
+    const sqlInsert = "SELECT Event_Location FROM Event_Locations WHERE Event_ID = ?";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/event/locations/:eventID/:locationName', (req, res) => {
+    const sqlInsert = "INSERT INTO Event_Location(Event_ID, Event_Location) VALUES (?, ?)";
+    db.query(sqlInsert, [req.params.eventID, req.params.locationName], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/event/locations/:eventID/:locationName', (req, res) => {
+    const sqlInsert = "DELETE FROM Event_Location WHERE Event_ID = ? AND Event_Location = ?";
+    db.query(sqlInsert, [req.params.eventID, req.params.locationName], (err, result => {
+        if (!err)
+        {
+            console.log("Deleted successfully");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/event/locations/:eventID', (req, res) => {
+    const sqlInsert = "DELETE FROM Event_Location WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Deleted successfully");
+        }
+        else
+            console.log(err);
+    }));
+});
 
 
 app.listen(3001, () => {

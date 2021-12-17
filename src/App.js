@@ -9,6 +9,7 @@ import Trip from "./components/trips/TripPage";
 import TripList from "./components/trips/TripList";
 import NewTrip from "./components/trips/NewTrip";
 import HomePage from "./components/HomePage";
+import Header from "./components/Header";
 import PrivateTripPage from "./components/PrivateTripPage";
 import PublicTripPage from "./components/PublicTripPage";
 import PublicEventsPage from "./components/PublicEventsPage";
@@ -25,7 +26,6 @@ const App = () => {
             path="/"
             element={
               <div>
-                <Header title="Name goes here" />
                 <HomePage />
               </div>
             }

@@ -4,14 +4,14 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const db = mysql.createPool({
+const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '1234',
     database: '471Project'
 });
 
-mysql.connect((err) => {  
+db.connect((err) => {  
     if(!err) {  
         console.log("Db Connection Successful");  
     }  
@@ -440,26 +440,12 @@ app.delete('/api/event/account/:accountID', (req, res) => {
     db.query(sqlInsert, [req.params.accountID], (err, result => {
         if (!err)
         {
-            console.log("Successfully all events owned by specified account");
+            console.log("Successfully deleted all events owned by specified account");
         }
         else
             console.log(err);
     }));
 });
-
-//TODO: Link account and event
-app.delete('/api/event/account/:accountID', (req, res) => {
-    const sqlInsert = "DELETE FROM Event WHERE Event_ID = ?";
-    db.query(sqlInsert, [req.params.eventID], (err, result => {
-        if (!err)
-        {
-            console.log("Successfully deleted event");
-        }
-        else
-            console.log(err);
-    }));
-});
-
 
 //EVENT_LOCATIONS TABLE API COMMANDS
 app.get('/api/event/locations/:eventID', (req, res) => {

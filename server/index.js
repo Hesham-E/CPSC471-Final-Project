@@ -24,12 +24,16 @@ app.use(cors()); //applying middle ware through .use()
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.listen(3001, () => {
+    console.log("Running on port 3001");
+});
+
 //Account Table API commands
 app.get('/api/account', (req, res) => {
     const sqlSelect = "SELECT ID, Username, Email FROM Account";
     db.query(sqlSelect, (err, result) => {
         res.send(result);
-        console.log(result.data);
+        console.log(result);
     });
 });
 
@@ -370,14 +374,28 @@ app.get('/api/event/:eventID', (req, res) => {
     }));
 });
 
+app.get('/api/event/:accountID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Event WHERE Account_Creator = ?";
+    db.query(sqlInsert, [req.params.accountID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
 app.post('/api/event', (req, res) => {
     const description = req.body.description; //will get these from Axios
     const date = req.body.date;
     const eventName = req.body.eventName;
     const duration = req.body.duration;
+    const accountID = req.body.accountID;
 
-    const sqlInsert = "INSERT INTO Event (Event_Description, Date, Event_Name, Duration) OUTPUT Inserted.Event_ID VALUES (?, ?, ?, ?)";
-    db.query(sqlInsert, [description, date, eventName, duration], (err, result => {
+    const sqlInsert = "INSERT INTO Event (Event_Description, Date, Event_Name, Duration, Account_Creator) OUTPUT Inserted.Event_ID VALUES (?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [description, date, eventName, duration, accountID], (err, result => {
         if (!err)
         {
             console.log(result);
@@ -411,6 +429,18 @@ app.delete('/api/event/:eventID', (req, res) => {
         if (!err)
         {
             console.log("Successfully deleted event");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/event/account/:accountID', (req, res) => {
+    const sqlInsert = "DELETE FROM Event WHERE Account_Creator = ?";
+    db.query(sqlInsert, [req.params.accountID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully all events owned by specified account");
         }
         else
             console.log(err);
@@ -1157,9 +1187,183 @@ app.delete('/api/tempuser/:displayName/:userID', (req, res) => {
 });
 
 //TEMORARYUSER_EVENT_CANVIEW TABLE API COMMANDS
+app.get('/api/tempuser/view/:eventID', (req, res) => {
+    const sqlInsert = "SELECT Display_Name FROM TemporaryUser_Event_CanView WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
 
+app.post('/api/tempuser/view/:eventID/:displayName', (req, res) => {
 
+    const sqlInsert = "INSERT INTO TemporaryUser_Event_CanView (Display_Name, Event_ID) VALUES (?, ?)";
+    db.query(sqlInsert, [req.body.eventID, req.body.displayName], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
 
-app.listen(3001, () => {
-    console.log("Running on port 3001");
+app.delete('/api/tempuser/view/:eventID/:displayName', (req, res) => {
+    const sqlInsert = "DELETE FROM TemporaryUser_Event_CanView  WHERE Display_Name = ? AND Event_ID = ?";
+    db.query(sqlInsert, [req.params.displayName, req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/tempuser/view/:eventID', (req, res) => {
+    const sqlInsert = "DELETE FROM TemporaryUser_Event_CanView WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//VEHICLE TABLE API COMMANDS
+
+app.get('/api/vehicle', (req, res) => {
+    const sqlInsert = "SELECT * FROM Vehicle";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/vehicle/type/:type', (req, res) => {
+    const sqlInsert = "SELECT Vehicle_ID FROM Vehicle WHERE Type = ?";
+    db.query(sqlInsert, [req.params.type], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/vehicle/:vehicleID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Vehicle WHERE Vehicle_ID = ?";
+    db.query(sqlInsert, [req.params.vehicleID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/vehicle', (req, res) => {
+    const sqlInsert = "INSERT INTO Vehicle (Price_per_passenger, Type, Start_Location, End_Location, Duration_of_use, Land, Water, Air) OUTPUT Inserted.Vehicle_ID VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [req.body.pricePerPassenger, req.body.type, req.body.startLocation, req.body.endLocation, req.body.durationOfUse, req.body.land, req.body.water, req.body.air], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.put('/api/vehicle/:vehicleID', (req, res) => {
+    const sqlInsert = "UPDATE Vehicle SET Price_per_passenger = ?, Type = ?, Start_Location = ?, End_Location = ?, Duration_of_use = ?, Land = ?, Water = ?, Air = ? WHERE Vehicle_ID = ?";
+    db.query(sqlInsert, [req.body.pricePerPassenger, req.body.type, req.body.startLocation, req.body.endLocation, req.body.durationOfUse, req.body.land, req.body.water, req.body.air, req.params.vehicleID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/vehicle/:vehicleID', (req, res) => {
+    const sqlInsert = "DELETE FROM Vehicle WHERE Vehicle = ?";
+    db.query(sqlInsert, [req.params.vehicleID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//VEHICLE_TRIP_USES TABLE API COMMANDS
+app.get('/api/trip/:tripID/vehicle', (req, res) => {
+    const sqlInsert = "SELECT Vehicle_ID FROM Vehicle_Trip_Uses WHERE Trip_ID = ?";
+    db.query(sqlInsert, [req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/trip/:tripID/vehicle/:vehicleID', (req, res) => {
+    const sqlInsert = "INSERT INTO Vehicle_Trip_Uses (Vehicle_ID, Trip_ID) VALUES (?, ?)";
+    db.query(sqlInsert, [req.params.tripID, req.params.vehicleID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/trip/:tripID/vehicle/:vehicleID', (req, res) => {
+    const sqlInsert = "DELETE FROM Vehicle_Trip_Uses WHERE Vehicle_ID = ? AND Trip_ID = ?";
+    db.query(sqlInsert, [req.params.vehicleID, req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/trip/:tripID/vehicle', (req, res) => {
+    const sqlInsert = "DELETE FROM Vehicle_Trip_Uses WHERE Trip_ID = ?";
+    db.query(sqlInsert, [req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
 });

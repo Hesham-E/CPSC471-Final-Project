@@ -1,0 +1,19 @@
+.span-1 {
+  font-size: 28px;
+  font-weight: 400;
+  font-family: "Roboto";
+  text-align: center;
+  line-height: 33px;
+}
+
+.div-1 {
+  border-radius: 42px;
+  background: #e9c46a;
+  display: flex;
+  padding: 9px 4px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100px;
+  height: 60px;
+}

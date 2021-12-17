@@ -15,6 +15,8 @@ import PublicTripPage from "./components/PublicTripPage";
 import PublicEventsPage from "./components/PublicEventsPage";
 import styles from "./App.module.css";
 import SignUpPage from "./components/SignUpPage";
+import UserSignUpPage from "./components/UserSignUpPage";
+import VendorSignUpPage from "./components/VendorSignUpPage";
 import LoginPage from "./components/LoginPage";
 
 const App = () => {
@@ -22,15 +24,6 @@ const App = () => {
     <React.Fragment>
       <div className={styles.page}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <div>
-                <HomePage />
-              </div>
-            }
-          />
-          <Route path="/account/*" element={<AccountPage />} />
           <Route
             path="/PublicEventsPage/*"
             element={
@@ -50,6 +43,24 @@ const App = () => {
             }
           />
           <Route
+            path="/SignUpPage/Vendor"
+            element={
+              <div>
+                <Header title="Sign Up" />
+                <VendorSignUpPage />
+              </div>
+            }
+          />
+          <Route
+            path="/SignUpPage/User"
+            element={
+              <div>
+                <Header title="Sign Up" />
+                <UserSignUpPage />
+              </div>
+            }
+          />
+          <Route
             path="/LoginPage/*"
             element={
               <div>
@@ -58,25 +69,24 @@ const App = () => {
               </div>
             }
           />
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/AccountPage/*"
+          {/* <Route
+            path="/accountSettings/*"
             element={
               <div>
                 <Header title="Account Settings" />
                 <AccountPage />
               </div>
             }
-          />
+          /> */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/account/*" element={<AccountPage />} />
           <Route path="/account/invite" element={<InvitePage />} />
           <Route path="/account/event" element={<Event />} />
-          <Route path="/account/eventlist" element={<EventList />} />
-          <Route path="/account/newevent" element={<NewEvent />} />
+          <Route path="/account/eventList" element={<EventList />} />
+          <Route path="/account/newEvent" element={<NewEvent />} />
           <Route path="/account/trip" element={<Trip />} />
           <Route path="/account/triplist" element={<TripList />} />
           <Route path="/account/newtrip" element={<NewTrip />} />
-          <Route path="/publictrips/*" element={<PublicTripPage />} />
-          <Route path="/privatetrips/*" element={<PrivateTripPage />} />
         </Routes>
       </div>
     </React.Fragment>

@@ -781,7 +781,7 @@ app.delete('/api/event/public/user/:ownerID', (req, res) => {
 //RECEIPT TABLE API COMMANDS
 app.get('/api/receipt/:receiptID', (req, res) => {
     const sqlInsert = "SELECT * FROM Receipt WHERE Receipt_ID = ?";
-    db.query(sqlInsert, [req.params.receiptID] (err, result => {
+    db.query(sqlInsert, [req.params.receiptID], (err, result => {
         if (!err)
         {
             console.log(result);
@@ -794,7 +794,7 @@ app.get('/api/receipt/:receiptID', (req, res) => {
 
 app.get('/api/receipt/transaction/:transactionID', (req, res) => {
     const sqlInsert = "SELECT * FROM Receipt WHERE Transaction_ID = ?";
-    db.query(sqlInsert, [req.params.transactionID] (err, result => {
+    db.query(sqlInsert, [req.params.transactionID], (err, result => {
         if (!err)
         {
             console.log(result);
@@ -807,7 +807,7 @@ app.get('/api/receipt/transaction/:transactionID', (req, res) => {
 
 app.get('/api/receipt/ticket/:ticketID', (req, res) => {
     const sqlInsert = "SELECT * FROM Receipt WHERE Ticket_ID = ?";
-    db.query(sqlInsert, [req.params.ticketID] (err, result => {
+    db.query(sqlInsert, [req.params.ticketID], (err, result => {
         if (!err)
         {
             console.log(result);
@@ -820,7 +820,7 @@ app.get('/api/receipt/ticket/:ticketID', (req, res) => {
 
 app.get('/api/receipt/account/:accountID', (req, res) => {
     const sqlInsert = "SELECT * FROM Receipt WHERE Account_ID = ?";
-    db.query(sqlInsert, [req.params.accountID] (err, result => {
+    db.query(sqlInsert, [req.params.accountID], (err, result => {
         if (!err)
         {
             console.log(result);
@@ -860,6 +860,305 @@ app.delete('/api/receipt/:receiptID', (req, res) => {
             console.log(err);
     }));
 });
+
+//TICKET TABLE API COMMANDS
+app.get('/api/ticket/:ticketID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Ticket WHERE Ticket_ID = ?";
+    db.query(sqlInsert, [req.params.ticketID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/ticket/owner/:ownerID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Ticket WHERE owner_id = ?";
+    db.query(sqlInsert, [req.params.ownerID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/ticket/event/:eventID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Ticket WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/ticket/tranasction/:transactionID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Ticket WHERE Transaction_ID = ?";
+    db.query(sqlInsert, [req.params.transactionID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/ticket', (req, res) => {
+    const owner_id = req.body.owner_id;
+    const eventID = req.body.eventID;
+    const eventDate = req.body.eventDate;
+    const eventLocation = req.body.eventLocation;
+    const transactionID = req.body.transactionID;
+
+    const sqlInsert = "INSERT INTO Ticket (owner_id, Event_ID, Event_Date, Event_Location, Transaction_ID) OUTPUT Inserted.Ticket_ID VALUES (?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [owner_id, eventID, eventDate, eventLocation, transactionID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/ticket/:ticketID', (req, res) => {
+    const sqlInsert = "DELETE FROM Ticket WHERE Ticket_ID  = ?";
+    db.query(sqlInsert, [req.params.ticketID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+
+//TICKET_AVAILABLE TABLE API COMMANDS
+app.get('/api/ticket/info/:eventID', (req, res) => {
+    const sqlInsert = "SELECT * FROM Ticket_Available WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/ticket/remaining/:eventID', (req, res) => {
+    const sqlInsert = "SELECT Tickets_Remaining FROM Ticket_Available WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/ticket/info', (req, res) => {
+    const eventID = req.body.eventID;
+    const eventDate = req.body.eventDate;
+    const eventLocation = req.body.eventLocation;
+    const ticketsRemaining = req.body.ticketsRemaining;
+
+    const sqlInsert = "INSERT INTO Ticket_Available (Event_ID, Event_Date, Event_Location, Tickets_Remaining) VALUES (?, ?, ?, ?)";
+    db.query(sqlInsert, [eventID, eventDate, eventLocation, ticketsRemaining], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.put('/api/ticket/info/:eventID', (req, res) => {
+    const eventID = req.params.eventID;
+    const eventDate = req.body.eventDate;
+    const eventLocation = req.body.eventLocation;
+    const ticketsRemaining = req.body.ticketsRemaining;
+
+    const sqlInsert = "UPDATE Ticket_Available SET Event_ID = ?, Event_Date = ?, Event_Location= ?, Tickets_Remaining = ? WHERE Event_ID = ?";
+    db.query(sqlInsert, [eventID, eventDate, eventLocation, ticketsRemaining, eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/ticket/info/:eventID', (req, res) => {
+    const sqlInsert = "DELETE FROM Ticket_Available WHERE Event_ID = ?";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//USER_INVITES TABLE API COMMANDS
+app.get('/api/invites/:userID', (req, res) => {
+    const sqlInsert = "SELECT ID, Is_trip_invite FROM User_Invites WHERE User_ID1 = ? OR User_ID2 = ?";
+    db.query(sqlInsert, [req.params.userID, req.params.userID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/invites/events/:eventID', (req, res) => {
+    const sqlInsert = "SELECT User_ID2 FROM User_Invites WHERE ID = ? AND Is_trip_invite = 0";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.get('/api/invites/trip/:tripID', (req, res) => {
+    const sqlInsert = "SELECT User_ID2 FROM User_Invites WHERE ID = ? AND Is_trip_invite = 1";
+    db.query(sqlInsert, [req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/invites', (req, res) => {
+    const userID1 = req.body.userID1;
+    const userID2 = req.body.userID2;
+    const eventID = req.body.eventID;
+    const isTripInvites = req.body.isTripInvites;
+
+    const sqlInsert = "INSERT INTO User_Invites (User_ID1, User_ID2, ID, Is_trip_invites) VALUES (?, ?, ?, ?)";
+    db.query(sqlInsert, [userID1, userID2, eventID, isTripInvites], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/invites/:userID1/:userID2', (req, res) => {
+    const sqlInsert = "DELETE FROM User_Invites WHERE User_ID1 = ? AND User_ID2 = ?";
+    db.query(sqlInsert, [req.params.userID1, req.params.userID2], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/invites/trip/:tripID', (req, res) => {
+    const sqlInsert = "DELETE FROM User_Invites WHERE ID = ? AND Is_trip_invite = 1";
+    db.query(sqlInsert, [req.params.tripID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/invites/event/:eventID', (req, res) => {
+    const sqlInsert = "DELETE FROM User_Invites WHERE ID = ? AND Is_trip_invite = 0";
+    db.query(sqlInsert, [req.params.eventID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//TEMPORARY_USER TABLE API COMMANDS
+app.get('/api/tempuser', (req, res) => {
+    const sqlInsert = "SELECT * FROM Temporary_User";
+    db.query(sqlInsert, (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.post('/api/tempuser', (req, res) => {
+    const displayName = req.body.displayName;
+
+    const sqlInsert = "INSERT INTO Temporary_User (Display_Name) OUTPUT Inserted.User_ID VALUES (?, ?)";
+    db.query(sqlInsert, [displayName], (err, result => {
+        if (!err)
+        {
+            console.log(result);
+            res.send(result);
+        }
+        else
+            console.log(err);
+    }));
+});
+
+app.delete('/api/tempuser/:displayName/:userID', (req, res) => {
+    const sqlInsert = "DELETE FROM Temporary_User WHERE Display_Name = ? AND User_ID = ?";
+    db.query(sqlInsert, [req.params.displayName, req.params.userID], (err, result => {
+        if (!err)
+        {
+            console.log("Successfully deleted");
+        }
+        else
+            console.log(err);
+    }));
+});
+
+//TEMORARYUSER_EVENT_CANVIEW TABLE API COMMANDS
+
+
 
 app.listen(3001, () => {
     console.log("Running on port 3001");

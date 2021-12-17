@@ -83,8 +83,13 @@ app.post('/api/users', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const sqlInsert = "INSERT INTO User (Display_Name, First_Name, Last_Name) AND INSERT INTO Account (Username, Email, Password) OUTPUT Inserted.a.ID VALUES (?, ?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [displayName, firstName, lastName, userName, email, password], (err, result => {
+    const sqlInsert = "INSERT INTO User (Display_Name, First_Name, Last_Name) VALUES (?, ?, ?)";
+    db.query(sqlInsert, [displayName, firstName, lastName], (result => {
+        console.log(result);
+    }));
+
+    const sqlPost = "INSERT INTO Account (Username, Email, Password) OUTPUT Inserted.ID VALUES (?, ?, ?)";
+    db.query(sqlPost, [userName, email, password], (result => {
         console.log(result);
     }));
 });

@@ -4,14 +4,14 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const db = mysql.createPool({
+const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '1234',
     database: '471Project'
 });
 
-mysql.connect((err) => {  
+db.connect((err) => {  
     if(!err) {  
         console.log("Db Connection Successful");  
     }  

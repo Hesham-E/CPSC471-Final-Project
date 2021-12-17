@@ -88,9 +88,15 @@ app.post('/api/users', (req, res) => {
         console.log(result);
     }));
 
-    const sqlPost = "INSERT INTO Account (Username, Email, Password) OUTPUT Inserted.ID VALUES (?, ?, ?)";
+    const sqlPost = "INSERT INTO Account (Username, Email, Password) VALUES (?, ?, ?)";
     db.query(sqlPost, [userName, email, password], (result => {
         console.log(result);
+    }));
+
+    const sqlGet = "SELECT ID FROM Account WHERE Username = ? AND Email = ? AND Password = ?";
+    db.query(sqlGet, [userName, email, password], (result => {
+        console.log(result);
+        res.send(result);
     }));
 });
 
@@ -118,14 +124,25 @@ app.get('/api/vendor', (req, res) => {
 });
 
 app.post('/api/vendor', (req, res) => {
-    const vendorName = req.body.displayName; //will get these from Axios
+    const vendorName = req.body.vendorName; //will get these from Axios
     const userName = req.body.userName;
     const email = req.body.email;
     const password = req.body.password;
 
-    const sqlInsert = "INSERT INTO Vendor(Vendor _Name) AND INSERT INTO Account(Username, Email, Password) OUTPUT Inserted.ID VALUES (?, ?, ?, ?)";
-    db.query(sqlInsert, [displayName, firstName, lastName, userName, email, password], (err, result => {
+    const sqlInsert = "INSERT INTO Vendor (Vendor _Name) VALUES (?)";
+    db.query(sqlInsert, [vendorName], (result => {
         console.log(result);
+    }));
+
+    const sqlPost = "INSERT INTO Account (Username, Email, Password) VALUES (?, ?, ?)";
+    db.query(sqlPost, [userName, email, password], (result => {
+        console.log(result);
+    }));
+
+    const sqlGet = "SELECT ID FROM Account WHERE Username = ? AND Email = ? AND Password = ?";
+    db.query(sqlGet, [userName, email, password], (result => {
+        console.log(result);
+        res.send(result);
     }));
 });
 

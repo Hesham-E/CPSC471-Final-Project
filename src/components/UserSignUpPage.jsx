@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./UserSignUpPage.css";
-
-
-
 
 const submitUserInformation = (state) => {
     Axios.post('http://localhost:3001/api/users', {
@@ -16,11 +13,6 @@ const submitUserInformation = (state) => {
         password: state.password
     }).then(() => {
     });
-
-    // Axios.get('http://localhost:3001/api/users', {
-
-    // }).then(() => {
-    // });
 }
 
 class UserSignUpPage extends Component {
@@ -35,8 +27,6 @@ class UserSignUpPage extends Component {
             password: ''
         };
     }
-
-
 
     render() {
         return (
@@ -74,12 +64,6 @@ class UserSignUpPage extends Component {
                     <input type="text" name="password" className="form-field" onChange={(e) => {
                         this.state.password = e.target.value;
                     }} />                </div>
-
-
-                {/* <button className="button-border" onClick={() => submitUserInformation(this.state)}>
-                    <Link to="/SignUpPage" className="button-text">Sign Up</Link>
-                </button> */}
-
 
                 <Link to="/SignUpPage" className="link">
                     <button className="button-border" onClick={() => submitUserInformation(this.state)}>

@@ -1,9 +1,6 @@
-.welcomeMessage {
-    display: flex;
-    justify-content: center;
-    font-size: larger;
-}
+import styles from "./temp.module.css";
 
+<<<<<<< HEAD
 .infoStack {
     display: flex;
     justify-content: space-evenly;
@@ -70,3 +67,14 @@
     text-decoration: none;
     
   }
+=======
+const temp = () => {
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
+};
+
+export default temp;
+>>>>>>> 52e60d55... Created button component and started Invite page and body

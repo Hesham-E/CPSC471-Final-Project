@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import AccountPage from "./components/account/AccountPage";
+import InvitePage from "./components/account/invite/InvitePage";
 import HomePage from "./components/HomePage";
 import PrivateTripPage from "./components/PrivateTripPage";
 import PublicTripPage from "./components/PublicTripPage";
@@ -61,6 +62,7 @@ const App = () => {
               </div>
             }
           />
+          <Route path="/account/invite" element={<InvitePage />} />
           <Route path="/publictrips/*" element={<PublicTripPage />} />
           <Route path="/privatetrips/*" element={<PrivateTripPage />} />
         </Routes>

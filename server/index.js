@@ -3,6 +3,7 @@ const app = express();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const axios = require('axios');
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -54,12 +55,14 @@ app.get('/api/account/password/:id', (req, res) => {
 });
 
 app.delete('/api/account/:id', (req, res) => {
+    axios.delete(`http://localhost:3001/api/moderator/${req.params.id}`);
+    axios.delete(`http://localhost:3001/api/users/${req.params.id}`);
     const sqlSelect = " DELETE FROM Account WHERE ID = ?";
     db.query(sqlSelect, [req.params.id], (err, result) => {
         if (!err)
-            console.log("Successfully deleted account: ${req.params.id}");
+            console.log(`Successfully deleted account: ${req.params.id}`);
         else {
-            console.log("Error arose while deleting account: ${req.params.id}");
+            console.log(`Error arose while deleting account: ${req.params.id}`);
             console.log(err);
         }
     });
@@ -116,6 +119,14 @@ app.put('/api/users/:id', (req, res) => {
     });
 });
 
+app.delete('/api/users/:id', (req, res) => {
+    const sqlInsert = "DELETE FROM User WHERE ID = ?";
+    db.query(sqlInsert, [req.parans.id], (err, result) => {
+        console.log(err);
+        console.log(result);
+    });
+});
+
 //VENDOR TABLE API COMMANDS
 app.get('/api/vendor', (req, res) => {
     const sqlSelect = "SELECT ID, Vendor_Name FROM Vendor";
@@ -140,8 +151,8 @@ app.post('/api/vendor', (req, res) => {
             console.log(resultN[0].maxID);
             res.send(resultN);
     
-            const sqlInsert = "INSERT INTO Vendor (Vendor_Name) VALUES (?)";
-            db.query(sqlInsert, [vendorName], (errN1, resultN1) => {
+            const sqlInsert = "INSERT INTO Vendor (ID, Vendor_Name) VALUES (?, ?)";
+            db.query(sqlInsert, [resultN[0].maxID, vendorName], (errN1, resultN1) => {
                 console.log(errN1);
                 console.log(resultN1);
             });
@@ -157,6 +168,14 @@ app.put('/api/vendor/:id', (req, res) => {
 
     const sqlInsert = "UPDATE Vendor AS v, Account AS a SET v.Vendor_Name = ?, a.Username = ?, a.Email = ?, a.Password = ? WHERE v.ID = ? AND a.ID = ?";
     db.query(sqlInsert, [vendorName, userName, email, password, req.params.id, req.params.id], (err, result) => {
+        console.log(err);
+        console.log(result);
+    });
+});
+
+app.delete('/api/users/:id', (req, res) => {
+    const sqlInsert = "DELETE FROM User WHERE ID = ?";
+    db.query(sqlInsert, [req.parans.id], (err, result) => {
         console.log(err);
         console.log(result);
     });
@@ -196,6 +215,18 @@ app.post('/api/moderator/:tripID/:accountID', (req, res) => {
 
 app.delete('/api/moderator/:tripID/:accountID', (req, res) => {
     const sqlSelect = "DELETE FROM Account_Trip_Moderates WHERE Account_ID = ? AND Trip_ID = ?";
+    db.query(sqlSelect, [req.params.accountID, req.params.tripID], (err, result) => {
+        if (!err)
+            console.log("Successfully moderator account: ${req.params.accountID}");
+        else {
+            console.log("Error arose while deleting moderator: ${req.params.accountID}");
+            console.log(err);
+        }
+    });
+});
+
+app.delete('/api/moderator/:accountID', (req, res) => {
+    const sqlSelect = "DELETE FROM Account_Trip_Moderates WHERE Account_ID = ?";
     db.query(sqlSelect, [req.params.accountID, req.params.tripID], (err, result) => {
         if (!err)
             console.log("Successfully moderator account: ${req.params.accountID}");

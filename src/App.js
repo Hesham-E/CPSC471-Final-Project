@@ -22,15 +22,68 @@ import Axios from 'axios';
 
 const USERS = [
   {
-    ID: "e1",
+    ID: "1",
     First_Name: "Etienne",
     Last_Name: "Lagace",
     Email: "etienne.lagace@shaw.ca",
     Username: "EtienneL",
     Display_Name: "Etienne Lagace",
     Password: "chocolate",
+    Type: "user",
+  },
+  {
+    ID: "2",
+    Vendor_Name: "THE organization",
+    Email: "coolio@gmail.com",
+    Username: "Habibi", 
+    Password: "boo",
+    Type: "vendor",
   },
 ];
+
+const EVENTS = [
+  {
+    Event_ID: "312234",
+    Event_Description: "This event is the coolest event",
+    Date: "2022-02-14",
+    Event_Name: "Valentine's Day", 
+    Duration: "6",
+    Account_Creator: "1",
+    Event_Location: [
+      "Calgary", 
+      "Edmonton", 
+      "Vancouver",
+    ],
+    Type: "private",
+    Participants: [
+      "etienne.cool@gmail.com",
+      "angelina.cooler@gmail.com",
+      "hesham.coolest@gmail.com",
+    ],
+  },
+  {
+    Event_ID: "234512",
+    Event_Description: "It's Christmas time again so be good or you will be put on the naughty list",
+    Date: "2021-12-25",
+    Event_Name: "Jesus Christ is Born", 
+    Duration: "24",
+    Account_Creator: "1",
+    Event_Location: [
+      "Calgary", 
+      "Edmonton", 
+      "Vancouver",
+      "Toronto", 
+      "New York",
+      "Montreal",
+    ],
+    Type: "private",
+    User_ID_invited: [
+      "elephant.cool@gmail.com",
+      "awesome.cooler@gmail.com",
+      "tree.coolest@gmail.com",
+    ],
+  },
+]
 
 const App = () => {
   const [authenticate, setAuthenticate] = useState(false);
@@ -68,6 +121,7 @@ const App = () => {
     <React.Fragment>
       <div className={styles.page}>
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route
             path="/PublicEventsPage/*"
             element={
@@ -122,7 +176,6 @@ const App = () => {
               </div>
             }
           /> */}
-          <Route path="/" element={<HomePage />} />
           {authenticate && (
             <Route
               path="/account/*"

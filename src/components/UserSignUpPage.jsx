@@ -50,12 +50,13 @@ const UserSignUpPage = (props) => {
 
   const signUp = () => {
     const user = {
-      firstname: enteredFirstName,
-      lastname: enteredLastName,
-      email: enteredEmail,
-      username: enteredUserName,
-      displayname: enteredDisplayName,
-      password: enteredPassword,
+      First_Name: enteredFirstName,
+      Last_Name: enteredLastName,
+      Email: enteredEmail,
+      Username: enteredUserName,
+      Display_Name: enteredDisplayName,
+      Password: enteredPassword,
+      Type: "user",
     };
     submitUserInformation();
     props.newUser(user);

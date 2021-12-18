@@ -36,10 +36,11 @@ const VendorSignUpPage = (props) => {
 
   const signUp = () => {
     const user = {
-      displayname: enteredOrgName,
-      email: enteredEmail,
-      username: enteredUserName,
-      password: enteredPassword,
+      Vendor_Name: enteredOrgName,
+      Email: enteredEmail,
+      Username: enteredUserName,
+      Password: enteredPassword,
+      Type: "vendor",
     };
     props.newUser(user);
   };

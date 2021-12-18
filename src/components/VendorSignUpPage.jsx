@@ -32,25 +32,25 @@ class VendorSignUpPage extends Component {
                 <div className="question-bar">
                     <p className="question-title">Name of Organization</p>
                     <input type="text" name="vendorName" className="form-field" onChange={(e) => {
-                        this.state.vendorName = e.target.value;
+                        this.setState({vendorName: e.target.value});
                     }} />
                 </div>
                 <div className="question-bar">
                     <p className="question-title">Username</p>
                     <input type="text" name="userName" className="form-field" onChange={(e) => {
-                        this.state.userName = e.target.value;
+                        this.setState({userName: e.target.value});
                     }} />
                 </div>
                 <div className="question-bar">
                     <p className="question-title">Email</p>
                     <input type="text" name="email" className="form-field" onChange={(e) => {
-                        this.state.email = e.target.value;
+                        this.setState({email: e.target.value});
                     }} />
                 </div>
                 <div className="question-bar">
                     <p className="question-title">Password</p>
                     <input type="text" name="password" className="form-field" onChange={(e) => {
-                        this.state.password = e.target.value;
+                        this.setState({password: e.target.value});
                     }} />
                 </div>
 

@@ -30,7 +30,15 @@ app.listen(3001, () => {
 
 //Account Table API commands
 app.get('/api/account', (req, res) => {
-    const sqlSelect = "SELECT ID, Username, Email FROM Account";
+    const sqlSelect = "SELECT ID, Username, Email, Password FROM Account";
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+        console.log(result);
+    });
+});
+
+app.get('/api/account/users', (req, res) => {
+    const sqlSelect = "SELECT * FROM Account JOIN User ON Account.ID = User.ID";
     db.query(sqlSelect, (err, result) => {
         res.send(result);
         console.log(result);
@@ -38,15 +46,7 @@ app.get('/api/account', (req, res) => {
 });
 
 app.get('/api/account/:id', (req, res) => {
-    const sqlSelect = "SELECT ID, Username, Email FROM Account WHERE ID = ?";
-    db.query(sqlSelect, [req.params.id], (err, result) => {
-        res.send(result);
-        console.log(result);
-    });
-});
-
-app.get('/api/account/password/:id', (req, res) => {
-    const sqlSelect = "SELECT Password FROM Account WHERE ID = ?";
+    const sqlSelect = "SELECT ID, Username, Email, Password FROM Account WHERE ID = ?";
     db.query(sqlSelect, [req.params.id], (err, result) => {
         res.send(result);
         console.log(result);

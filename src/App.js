@@ -18,16 +18,17 @@ import SignUpPage from "./components/SignUpPage";
 import UserSignUpPage from "./components/UserSignUpPage";
 import VendorSignUpPage from "./components/VendorSignUpPage";
 import LoginPage from "./components/LoginPage";
+import Axios from 'axios';
 
 const USERS = [
   {
-    id: "e1",
-    firstname: "Etienne",
-    lastname: "Lagace",
-    email: "etienne.lagace@shaw.ca",
-    username: "EtienneL",
-    displayname: "Etienne Lagace",
-    password: "chocolate",
+    ID: "e1",
+    First_Name: "Etienne",
+    Last_Name: "Lagace",
+    Email: "etienne.lagace@shaw.ca",
+    Username: "EtienneL",
+    Display_Name: "Etienne Lagace",
+    Password: "chocolate",
   },
 ];
 
@@ -37,10 +38,14 @@ const App = () => {
   const [targetUser, setTargetUser] = useState("");
 
   const logInHandler = (username, password) => {
+    Axios.get("http://localhost:3001/api/account/users", {}).then((response) => {
+      setUserList(response.data);
+    });
+
     userList.forEach((item) => {
-      if (username === item.username && password === item.password) {
+      if (username === item.Username && password === item.Password) {
         setAuthenticate(true);
-        setTargetUser(item.displayname);
+        setTargetUser(item.Display_Name);
       }
     });
   };

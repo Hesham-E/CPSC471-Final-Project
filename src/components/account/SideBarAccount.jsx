@@ -5,19 +5,19 @@ import styles from "./SideBarAccount.module.css";
 const SideBar = (props) => {
   return (
     <div className={styles.sideBar}>
-      <Link to="/" className={styles.navLinks}>
+      <Link to="/account" className={styles.navLinks}>
         Account Settings
       </Link>
-      <Link to="/" className={styles.navLinks}>
+      <Link to="/account/eventList" className={styles.navLinks}>
         Events
       </Link>
-      <Link to="/" className={styles.navLinks}>
+      <Link to="/account/tripList" className={styles.navLinks}>
         Trips
       </Link>
-      <Link to="/" className={styles.navLinks}>
+      <Link to="/account/invite" className={styles.navLinks}>
         Invite
       </Link>
-      <Link to="/" className={styles.navLinks}>
+      <Link to="/" className={styles.navLinks} onClick={props.logout}>
         Log out
       </Link>
     </div>

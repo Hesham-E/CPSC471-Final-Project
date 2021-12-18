@@ -50,6 +50,10 @@ const App = () => {
     });
   };
 
+  const logOutHandler = () => {
+    setAuthenticate(false);
+  };
+
   return (
     <React.Fragment>
       <div className={styles.page}>
@@ -112,16 +116,26 @@ const App = () => {
           {authenticate && (
             <Route
               path="/account/*"
-              element={<AccountPage user={targetUser} />}
+              element={<AccountPage user={targetUser} logout={logOutHandler} />}
             />
           )}
-          <Route path="/account/invite" element={<InvitePage />} />
-          <Route path="/account/event" element={<Event />} />
-          <Route path="/account/eventList" element={<EventList />} />
-          <Route path="/account/newEvent" element={<NewEvent />} />
-          <Route path="/account/trip" element={<Trip />} />
-          <Route path="/account/triplist" element={<TripList />} />
-          <Route path="/account/newtrip" element={<NewTrip />} />
+          {authenticate && (
+            <Route path="/account/invite" element={<InvitePage />} />
+          )}
+          {authenticate && <Route path="/account/event" element={<Event />} />}
+          {authenticate && (
+            <Route path="/account/eventList" element={<EventList />} />
+          )}
+          {authenticate && (
+            <Route path="/account/newEvent" element={<NewEvent />} />
+          )}
+          {authenticate && <Route path="/account/trip" element={<Trip />} />}
+          {authenticate && (
+            <Route path="/account/tripList" element={<TripList />} />
+          )}
+          {authenticate && (
+            <Route path="/account/newtrip" element={<NewTrip />} />
+          )}
         </Routes>
       </div>
     </React.Fragment>

@@ -10,7 +10,7 @@ const HeaderAccount = (props) => {
         style={{ backgroundImage: `url(${travelPicture})` }}
       >
         <div className={styles.header}>
-          <SideBar />
+          <SideBar logout={props.logout} />
           <span className={styles.title}>{props.user}</span>
         </div>
       </div>

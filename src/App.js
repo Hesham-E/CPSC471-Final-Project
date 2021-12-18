@@ -91,9 +91,23 @@ const App = () => {
   const [targetUser, setTargetUser] = useState("");
 
   const logInHandler = (username, password) => {
+    setUserList(); //comment this out if you want to use the test accounts
     Axios.get("http://localhost:3001/api/account/users", {}).then((response) => {
-      setUserList(response.data);
+        response.data.forEach((item) => {
+          item.Type = "user";
+        })
+
+        setUserList([...userList, ...response.data]);
     });
+
+    Axios.get("http://localhost:3001/api/account/vendors", {}).then((response) => {
+      response.data.forEach((item) => {
+        item.Type = "vendor";
+      })
+
+      setUserList([...userList, ...response.data]);
+    });
+
 
     userList.forEach((item) => {
       if (username === item.Username && password === item.Password) {

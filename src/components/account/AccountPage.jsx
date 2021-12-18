@@ -2,10 +2,10 @@ import styles from "./AccountPage.module.css";
 import Header from "./HeaderAccount";
 import Body from "./AccountBody";
 
-const AccountPage = () => {
+const AccountPage = (props) => {
   return (
     <div className={styles.body}>
-      <Header />
+      <Header user={props.user} />
       <Body />
     </div>
   );

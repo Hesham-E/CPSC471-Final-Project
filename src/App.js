@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router";
 import AccountPage from "./components/account/AccountPage";
 import InvitePage from "./components/account/invite/InvitePage";
@@ -10,8 +10,8 @@ import TripList from "./components/trips/TripList";
 import NewTrip from "./components/trips/NewTrip";
 import HomePage from "./components/HomePage";
 import Header from "./components/Header";
-import PrivateTripPage from "./components/PrivateTripPage";
-import PublicTripPage from "./components/PublicTripPage";
+// import PrivateTripPage from "./components/PrivateTripPage";
+// import PublicTripPage from "./components/PublicTripPage";
 import PublicEventsPage from "./components/PublicEventsPage";
 import styles from "./App.module.css";
 import SignUpPage from "./components/SignUpPage";
@@ -19,7 +19,37 @@ import UserSignUpPage from "./components/UserSignUpPage";
 import VendorSignUpPage from "./components/VendorSignUpPage";
 import LoginPage from "./components/LoginPage";
 
+const USERS = [
+  {
+    id: "e1",
+    username: "EtienneL",
+    password: "chocolate",
+  },
+  {
+    id: "e2",
+    username: "HeshamE",
+    password: "mayo",
+  },
+  {
+    id: "e3",
+    username: "AngelinaR",
+    password: "computer",
+  },
+];
+
 const App = () => {
+  const [authenticate, setAuthenticate] = useState(false);
+  const [targetUser, setTargetUser] = useState("");
+
+  const logInHandler = (username, password) => {
+    USERS.forEach((item) => {
+      if (username === item.username && password === item.password) {
+        setAuthenticate(true);
+        setTargetUser(username);
+      }
+    });
+  };
+
   return (
     <React.Fragment>
       <div className={styles.page}>
@@ -65,7 +95,7 @@ const App = () => {
             element={
               <div>
                 <Header title="Login" />
-                <LoginPage />
+                <LoginPage logUser={logInHandler} auth={authenticate} />
               </div>
             }
           />
@@ -79,7 +109,12 @@ const App = () => {
             }
           /> */}
           <Route path="/" element={<HomePage />} />
-          <Route path="/account/*" element={<AccountPage />} />
+          {authenticate && (
+            <Route
+              path="/account/*"
+              element={<AccountPage user={targetUser} />}
+            />
+          )}
           <Route path="/account/invite" element={<InvitePage />} />
           <Route path="/account/event" element={<Event />} />
           <Route path="/account/eventList" element={<EventList />} />

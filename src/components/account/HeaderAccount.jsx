@@ -2,7 +2,7 @@ import SideBar from "./SideBarAccount";
 import styles from "./HeaderAccount.module.css";
 import travelPicture from "../../pictures/travel.png";
 
-const HeaderAccount = () => {
+const HeaderAccount = (props) => {
   return (
     <div className={styles.head}>
       <div
@@ -11,7 +11,7 @@ const HeaderAccount = () => {
       >
         <div className={styles.header}>
           <SideBar />
-          <span className={styles.title}>SOME USER</span>
+          <span className={styles.title}>{props.user}</span>
         </div>
       </div>
     </div>

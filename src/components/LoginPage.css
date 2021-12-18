@@ -1,62 +1,67 @@
 .log-in {
-    display: flex;
-    flex-direction: column;
-    min-height: 80vh;
-  }
-  .background-rectangle {
-    background: #287271;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100%;
-  }
-  .page-title {
-    text-align: center;
-    vertical-align: top;
-    font-size: 48px;
-    font-family: Roboto;
-    line-height: auto;
-    color: #ffffff;
-  }
-  .question-bar {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    width: 100%;
-  }
-  .form-field {
-    margin: auto;
-    height: 49px;
-    width: 50%;
-    background-color: #31dec9;
-  }
-  .question-title {
-    text-align: center;
-    vertical-align: top;
-    font-size: 36px;
-    font-family: Roboto;
-    line-height: auto;
-    color: #ffffff;
-  }
-  .button-border {
-    margin: auto;
-    border-radius: 42.5px;
-    height: 85px;
-    width: 25%;
-    background-color: #e9c46a;
-  }
-  .button-text {
-    text-align: center;
-    vertical-align: top;
-    font-size: 46px;
-    font-family: Roboto;
-    line-height: auto;
-    color: #000000;
-    text-decoration: none;
-  }
-  .link {
-    display: flex;
-    margin: auto;
-    width: 100%;
-    text-decoration: none;
-  }
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+}
+.background-rectangle {
+  background: #287271;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+.page-title {
+  text-align: center;
+  vertical-align: top;
+  font-size: 48px;
+  font-family: Roboto;
+  line-height: auto;
+  color: #ffffff;
+}
+.form-field {
+  margin: auto;
+  height: 49px;
+  width: 50%;
+  background-color: #31dec9;
+}
+.button-border {
+  margin: auto;
+  border-radius: 42.5px;
+  height: 85px;
+  width: 25%;
+  background-color: #e9c46a;
+}
+.button-text {
+  text-align: center;
+  vertical-align: top;
+  font-size: 46px;
+  font-family: Roboto;
+  line-height: auto;
+  color: #000000;
+  text-decoration: none;
+}
+.question-bar {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+}
+
+.question-bar label {
+  text-align: center;
+  vertical-align: top;
+  font-size: 36px;
+  font-family: Roboto;
+  line-height: auto;
+  color: #ffffff;
+}
+
+.question-bar input {
+  align-self: center;
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
+}

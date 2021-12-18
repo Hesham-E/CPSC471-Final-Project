@@ -88,14 +88,14 @@ app.post('/api/users', (req, res) => {
         console.log(result);
 
         const sqlGet = "SELECT MAX(ID) AS maxID FROM Account";
-        db.query(sqlGet, (err, result) => {
-            console.log(result[0].maxID);
-            res.send(result);
+        db.query(sqlGet, (errGet, resultGet) => {
+            console.log(resultGet[0].maxID);
+            res.send(resultGet);
     
             const sqlInsert = "INSERT INTO User (ID, Display_Name, First_Name, Last_Name) VALUES (?, ?, ?, ?)";
-            db.query(sqlInsert, [result[0].maxID, displayName, firstName, lastName], (err, result) => {
-                console.log(err);
-                console.log(result);
+            db.query(sqlInsert, [resultGet[0].maxID, displayName, firstName, lastName], (errN, resultN) => {
+                console.log(errN);
+                console.log(resultN);
             });
         });
     });    
@@ -136,14 +136,14 @@ app.post('/api/vendor', (req, res) => {
         console.log(result);
         
         const sqlGet = "SELECT MAX(ID) AS maxID FROM Account";
-        db.query(sqlGet, (err, result) => {
-            console.log(result[0].maxID);
-            res.send(result);
+        db.query(sqlGet, (errN, resultN) => {
+            console.log(resultN[0].maxID);
+            res.send(resultN);
     
             const sqlInsert = "INSERT INTO Vendor (Vendor_Name) VALUES (?)";
-            db.query(sqlInsert, [vendorName], (err, result) => {
-                console.log(err);
-                console.log(result);
+            db.query(sqlInsert, [vendorName], (errN1, resultN1) => {
+                console.log(errN1);
+                console.log(resultN1);
             });
         });
     });    
@@ -240,9 +240,9 @@ app.post('/api/trip', (req, res) => {
         {
             console.log(result);
             const sqlGet = "SELECT MAX(Trip_ID) AS maxID FROM Trip";
-            db.query(sqlGet, (err, result) => {
-                console.log(result[0].maxID);
-                res.send(result);
+            db.query(sqlGet, (errN, resultN) => {
+                console.log(resultN[0].maxID);
+                res.send(resultN);
             });
         }
         else
@@ -431,9 +431,9 @@ app.post('/api/event', (req, res) => {
         if (!err)
         {
             console.log(result);
-            const sqlGET = "SELECT MAX(Event_ID) FROM Event";
-            db.query(sqlGET, (err, result) => {
-                res.send(result);
+            const sqlGET = "SELECT MAX(Event_ID) AS maxID FROM Event";
+            db.query(sqlGET, (errN, resultN) => {
+                res.send(resultN);
             });
         }
         else
@@ -726,9 +726,9 @@ app.post('/api/transactions', (req, res) => {
         if (!err)
         {
             console.log(result);
-            const sqlGet = "SELECT MAX(Transaction_ID) FROM Transactions";
-            db.query(sqlGet, (err, result) => {
-                res.send(result);
+            const sqlGet = "SELECT MAX(Transaction_ID) AS maxID FROM Transactions";
+            db.query(sqlGet, (errN, resultN) => {
+                res.send(resultN);
             });
             
         }
@@ -894,7 +894,7 @@ app.post('/api/receipt', (req, res) => {
         if (!err)
         {
             console.log(result);
-            const sqlGet = "SELECT MAX(Receipt_ID) FROM Reciept";
+            const sqlGet = "SELECT MAX(Receipt_ID) AS maxID FROM Reciept";
             db.query(sqlGet, (errGet, resultGet) => {
                 res.send(resultGet);
             });
@@ -981,7 +981,7 @@ app.post('/api/ticket', (req, res) => {
         if (!err)
         {
             console.log(result);
-            const sqlGet = "SELECT MAX(Ticket_ID) FROM Ticket";
+            const sqlGet = "SELECT MAX(Ticket_ID) AS maxID FROM Ticket";
             db.query(sqlGet, (errGet, resultGet) => {
                 res.send(resultGet);
             });
@@ -1198,21 +1198,24 @@ app.get('/api/tempuser', (req, res) => {
 app.post('/api/tempuser', (req, res) => {
     const displayName = req.body.displayName;
 
-    const sqlInsert = "INSERT INTO Temporary_User (Display_Name) OUTPUT Inserted.User_ID VALUES (?, ?)";
+    const sqlInsert = "INSERT INTO Temporary_User (User_ID) VALUES (?, ?)";
     db.query(sqlInsert, [displayName], (err, result) => {
         if (!err)
         {
             console.log(result);
-            res.send(result);
+            const sqlGet = "SELECT MAX(Display_Name) AS maxID FROM Temporary_User"
+            db.query(sqlGet, (errN, resultN) => {
+                res.send(resultN);
+            });
         }
         else
             console.log(err);
     });
 });
 
-app.delete('/api/tempuser/:displayName/:userID', (req, res) => {
-    const sqlInsert = "DELETE FROM Temporary_User WHERE Display_Name = ? AND User_ID = ?";
-    db.query(sqlInsert, [req.params.displayName, req.params.userID], (err, result) => {
+app.delete('/api/tempuser/:displayName', (req, res) => {
+    const sqlInsert = "DELETE FROM Temporary_User WHERE Display_Name = ?";
+    db.query(sqlInsert, [req.params.displayName], (err, result) => {
         if (!err)
         {
             console.log("Successfully deleted");
@@ -1239,7 +1242,7 @@ app.get('/api/tempuser/view/:eventID', (req, res) => {
 app.post('/api/tempuser/view/:eventID/:displayName', (req, res) => {
 
     const sqlInsert = "INSERT INTO TemporaryUser_Event_CanView (Display_Name, Event_ID) VALUES (?, ?)";
-    db.query(sqlInsert, [req.body.eventID, req.body.displayName], (err, result) => {
+    db.query(sqlInsert, [req.params.displayName, req.params.eventID], (err, result) => {
         if (!err)
         {
             console.log(result);
@@ -1316,12 +1319,15 @@ app.get('/api/vehicle/:vehicleID', (req, res) => {
 });
 
 app.post('/api/vehicle', (req, res) => {
-    const sqlInsert = "INSERT INTO Vehicle (Price_per_passenger, Type, Start_Location, End_Location, Duration_of_use, Land, Water, Air) OUTPUT Inserted.Vehicle_ID VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [req.body.pricePerPassenger, req.body.type, req.body.startLocation, req.body.endLocation, req.body.durationOfUse, req.body.land, req.body.water, req.body.air], (err, result) => {
+    const sqlInsert = "INSERT INTO Vehicle (Price_per_passenger, Type, Land, Water, Air) VALUES (?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [req.body.pricePerPassenger, req.body.type, req.body.land, req.body.water, req.body.air], (err, result) => {
         if (!err)
         {
             console.log(result);
-            res.send(result);
+            const sqlGet = "SELECT MAX(Vehicle_ID) AS maxID FROM Vehicle"
+            db.query(sqlGet, (errN, resultN) => {
+                res.send(resultN);
+            })
         }
         else
             console.log(err);
@@ -1329,8 +1335,8 @@ app.post('/api/vehicle', (req, res) => {
 });
 
 app.put('/api/vehicle/:vehicleID', (req, res) => {
-    const sqlInsert = "UPDATE Vehicle SET Price_per_passenger = ?, Type = ?, Start_Location = ?, End_Location = ?, Duration_of_use = ?, Land = ?, Water = ?, Air = ? WHERE Vehicle_ID = ?";
-    db.query(sqlInsert, [req.body.pricePerPassenger, req.body.type, req.body.startLocation, req.body.endLocation, req.body.durationOfUse, req.body.land, req.body.water, req.body.air, req.params.vehicleID], (err, result) => {
+    const sqlInsert = "UPDATE Vehicle SET Price_per_passenger = ?, Type = ?, Land = ?, Water = ?, Air = ? WHERE Vehicle_ID = ?";
+    db.query(sqlInsert, [req.body.pricePerPassenger, req.body.type, req.body.land, req.body.water, req.body.air, req.params.vehicleID], (err, result) => {
         if (!err)
         {
             console.log(result);
@@ -1368,8 +1374,8 @@ app.get('/api/trip/:tripID/vehicle', (req, res) => {
 });
 
 app.post('/api/trip/:tripID/vehicle/:vehicleID', (req, res) => {
-    const sqlInsert = "INSERT INTO Vehicle_Trip_Uses (Vehicle_ID, Trip_ID) VALUES (?, ?)";
-    db.query(sqlInsert, [req.params.tripID, req.params.vehicleID], (err, result) => {
+    const sqlInsert = "INSERT INTO Vehicle_Trip_Uses (Trip_ID, Vehicle_ID, Start_Location, End_Location, Start_Time, End_Time) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [req.params.tripID, req.params.vehicleID, req.body.startLocation, req.body.endLocation, req.body.startTime, req.body.endTime], (err, result) => {
         if (!err)
         {
             console.log(result);

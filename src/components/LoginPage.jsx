@@ -3,11 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Axios from 'axios';
 import "./LoginPage.css";
 
-
-
 function LoginPage() {
-
-    let isLoggedIn = false;
+    
     let navigate = useNavigate('');
     let [userName, setUsername] = useState('');
     let [password, setPassword] = useState('');

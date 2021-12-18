@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Axios from 'axios';
 import "./LoginPage.css";
 
@@ -11,10 +11,26 @@ function LoginPage() {
 
     const authenticateLoginInfo = () => {
         Axios.get('http://localhost:3001/api/account').then((response) => {
-            if (response.data.userName.localeCompare(userName) == 0 && response.data.password.localeCompare(password) == 0)
-                navigate('/');
+            if (response.data != null)
+            {
+                let logInValid = false;
+                for (let i = 0; i < response.data.length; i++)
+                {
+                    if (response.data[i]["Username"] === userName)
+                    {
+                        Axios.get(`http://localhost:3001/api/account/password/${response.data[i]["ID"]}`).then((responseP) => {
+                        if (responseP.data[0]["Password"] === password)
+                        {
+                            navigate('/');
+                        }
+                        i = responseP.data.length;
+                        });
+                    }
+                }
+            }
             else
                 navigate('/LoginPage');
+            
         });
     }
 

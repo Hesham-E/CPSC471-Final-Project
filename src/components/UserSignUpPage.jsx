@@ -36,33 +36,33 @@ class UserSignUpPage extends Component {
                 <div className="question-bar">
                     <p className="question-title">First Name</p>
                     <input type="text" name="firstName" className="form-field" onChange={(e) => {
-                        this.state.firstName = e.target.value;
+                        this.setState({firstName: e.target.value});
                     }} />
                 </div>
                 <div className="question-bar">
                     <p className="question-title">Last Name</p>
                     <input type="text" name="lastName" className="form-field" onChange={(e) => {
-                        this.state.lastName = e.target.value;
+                        this.setState({lastName: e.target.value});
                     }} />                </div>
                 <div className="question-bar">
                     <p className="question-title">Email</p>
                     <input type="text" name="email" className="form-field" onChange={(e) => {
-                        this.state.email = e.target.value;
+                        this.setState({email: e.target.value});
                     }} />                </div>
                 <div className="question-bar">
                     <p className="question-title">User Name</p>
                     <input type="text" name="userName" className="form-field" onChange={(e) => {
-                        this.state.userName = e.target.value;
+                        this.setState({userName: e.target.value});
                     }} />                </div>
                 <div className="question-bar">
                     <p className="question-title">Display Name</p>
                     <input type="text" name="displayName" className="form-field" onChange={(e) => {
-                        this.state.displayName = e.target.value;
+                        this.setState({displayName: e.target.value});
                     }} />                </div>
                 <div className="question-bar">
                     <p className="question-title">Password</p>
                     <input type="text" name="password" className="form-field" onChange={(e) => {
-                        this.state.password = e.target.value;
+                        this.setState({password: e.target.value});
                     }} />                </div>
 
                 <Link to="/SignUpPage" className="link">

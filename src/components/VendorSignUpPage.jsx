@@ -1,16 +1,8 @@
 import React, { useState } from "react";
-// import Axios from "axios";
+import Axios from "axios";
 import { Link } from "react-router-dom";
 import "./VendorSignUpPage.css";
 
-// const submitVendorInformation = (state) => {
-//   Axios.post("http://localhost:3001/api/vendor", {
-//     vendorName: state.vendorName,
-//     userName: state.userName,
-//     email: state.email,
-//     password: state.password,
-//   }).then(() => {});
-// };
 
 const VendorSignUpPage = (props) => {
   const [enteredOrgName, setEnteredOrgName] = useState("");
@@ -34,6 +26,15 @@ const VendorSignUpPage = (props) => {
     setEnteredPassword(event.target.value);
   };
 
+  const submitVendorInformation = () => {
+    Axios.post("http://localhost:3001/api/vendor", {
+      vendorName: enteredOrgName,
+      userName: enteredUserName,
+      email: enteredEmail,
+      password: enteredPassword,
+    }).then(() => {});
+  };  
+
   const signUp = () => {
     const user = {
       Vendor_Name: enteredOrgName,
@@ -42,6 +43,7 @@ const VendorSignUpPage = (props) => {
       Password: enteredPassword,
       Type: "vendor",
     };
+    submitVendorInformation();
     props.newUser(user);
   };
 

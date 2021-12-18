@@ -45,6 +45,14 @@ app.get('/api/account/users', (req, res) => {
     });
 });
 
+app.get('/api/account/vendors', (req, res) => {
+    const sqlSelect = "SELECT * FROM Account JOIN Vendor ON Account.ID = Vendor.ID";
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+        console.log(result);
+    });
+});
+
 app.get('/api/account/:id', (req, res) => {
     const sqlSelect = "SELECT ID, Username, Email, Password FROM Account WHERE ID = ?";
     db.query(sqlSelect, [req.params.id], (err, result) => {
@@ -140,8 +148,8 @@ app.post('/api/vendor', (req, res) => {
             console.log(resultN[0].maxID);
             res.send(resultN);
     
-            const sqlInsert = "INSERT INTO Vendor (Vendor_Name) VALUES (?)";
-            db.query(sqlInsert, [vendorName], (errN1, resultN1) => {
+            const sqlInsert = "INSERT INTO Vendor (Vendor_Name, ID) VALUES (?, ?)";
+            db.query(sqlInsert, [vendorName, resultN[0].maxID], (errN1, resultN1) => {
                 console.log(errN1);
                 console.log(resultN1);
             });

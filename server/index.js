@@ -348,7 +348,6 @@ app.post('/api/trip/events/:tripID/:eventID', (req, res) => {
         if (!err)
         {
             console.log(result);
-            res.send(result);
         }
         else
             console.log(err);
@@ -427,12 +426,15 @@ app.post('/api/event', (req, res) => {
     const duration = req.body.duration;
     const accountID = req.body.accountID;
 
-    const sqlInsert = "INSERT INTO Event (Event_Description, Date, Event_Name, Duration, Account_Creator) OUTPUT Inserted.Event_ID VALUES (?, ?, ?, ?, ?)";
+    const sqlInsert = "INSERT INTO Event (Event_Description, Date, Event_Name, Duration, Account_Creator) VALUES (?, ?, ?, ?, ?)";
     db.query(sqlInsert, [description, date, eventName, duration, accountID], (err, result) => {
         if (!err)
         {
             console.log(result);
-            res.send(result);
+            const sqlGET = "SELECT MAX(Event_ID) FROM Event";
+            db.query(sqlGET, (err, result) => {
+                res.send(result);
+            });
         }
         else
             console.log(err);
@@ -495,12 +497,11 @@ app.get('/api/event/locations/:eventID', (req, res) => {
 });
 
 app.post('/api/event/locations/:eventID/:locationName', (req, res) => {
-    const sqlInsert = "INSERT INTO Event_Location(Event_ID, Event_Location) VALUES (?, ?)";
+    const sqlInsert = "INSERT INTO Event_Locations (Event_ID, Event_Location) VALUES (?, ?)";
     db.query(sqlInsert, [req.params.eventID, req.params.locationName], (err, result) => {
         if (!err)
         {
             console.log(result);
-            res.send(result);
         }
         else
             console.log(err);
@@ -508,7 +509,7 @@ app.post('/api/event/locations/:eventID/:locationName', (req, res) => {
 });
 
 app.delete('/api/event/locations/:eventID/:locationName', (req, res) => {
-    const sqlInsert = "DELETE FROM Event_Location WHERE Event_ID = ? AND Event_Location = ?";
+    const sqlInsert = "DELETE FROM Event_Locations WHERE Event_ID = ? AND Event_Location = ?";
     db.query(sqlInsert, [req.params.eventID, req.params.locationName], (err, result) => {
         if (!err)
         {
@@ -520,7 +521,7 @@ app.delete('/api/event/locations/:eventID/:locationName', (req, res) => {
 });
 
 app.delete('/api/event/locations/:eventID', (req, res) => {
-    const sqlInsert = "DELETE FROM Event_Location WHERE Event_ID = ?";
+    const sqlInsert = "DELETE FROM Event_Locations WHERE Event_ID = ?";
     db.query(sqlInsert, [req.params.eventID], (err, result) => {
         if (!err)
         {
@@ -578,7 +579,6 @@ app.post('/api/event/vendor/:vendorID/:eventID', (req, res) => {
         if (!err)
         {
             console.log(result);
-            res.send(result);
         }
         else
             console.log(err);
@@ -643,7 +643,6 @@ app.post('/api/event/private', (req, res) => {
         if (!err)
         {
             console.log(result);
-            res.send(result);
         }
         else
             console.log(err);

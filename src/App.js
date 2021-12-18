@@ -86,7 +86,7 @@ const App = () => {
             element={
               <div>
                 <Header title="Sign Up" />
-                <VendorSignUpPage />
+                <VendorSignUpPage newUser={signUpHandler} />
               </div>
             }
           />

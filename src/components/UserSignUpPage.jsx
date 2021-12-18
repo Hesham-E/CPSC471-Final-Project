@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import Axios from "axios";
+// import Axios from "axios";
 import { Link } from "react-router-dom";
 import "./UserSignUpPage.css";
 
-const submitUserInformation = (state) => {
-  Axios.post("http://localhost:3001/api/users", {
-    displayName: state.displayName,
-    firstName: state.firstName,
-    lastName: state.lastName,
-    userName: state.userName,
-    email: state.email,
-    password: state.password,
-  }).then(() => {});
-};
+// const submitUserInformation = (state) => {
+//   Axios.post("http://localhost:3001/api/users", {
+//     displayName: state.displayName,
+//     firstName: state.firstName,
+//     lastName: state.lastName,
+//     userName: state.userName,
+//     email: state.email,
+//     password: state.password,
+//   }).then(() => {});
+// };
 
 const UserSignUpPage = (props) => {
   const [enteredFirstName, setEnteredFirstName] = useState("");

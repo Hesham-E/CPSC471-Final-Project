@@ -54,3 +54,9 @@
     color: #000000;
     text-decoration: none;
   }
+  .link {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    text-decoration: none;
+  }

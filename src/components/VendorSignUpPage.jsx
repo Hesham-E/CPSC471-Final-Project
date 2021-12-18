@@ -1,8 +1,29 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import { Link } from "react-router-dom";
 import "./VendorSignUpPage.css";
 
+const submitVendorInformation = (state) => {
+    Axios.post('http://localhost:3001/api/vendor', {
+        vendorName: state.vendorName,
+        userName: state.userName,
+        email: state.email,
+        password: state.password
+    }).then(() => {
+    });
+}
+
 class VendorSignUpPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            vendorName: '',
+            email: '',
+            userName: '',
+            password: ''
+        };
+    }
+
     render() {
         return (
             <div className="vendor-sign-up">
@@ -10,26 +31,34 @@ class VendorSignUpPage extends Component {
                 <p className="page-title">Vendor Sign Up</p>
                 <div className="question-bar">
                     <p className="question-title">Name of Organization</p>
-                    <div className="form-field" />
+                    <input type="text" name="vendorName" className="form-field" onChange={(e) => {
+                        this.state.vendorName = e.target.value;
+                    }} />
                 </div>
                 <div className="question-bar">
                     <p className="question-title">Username</p>
-                    <div className="form-field" />
+                    <input type="text" name="userName" className="form-field" onChange={(e) => {
+                        this.state.userName = e.target.value;
+                    }} />
                 </div>
                 <div className="question-bar">
                     <p className="question-title">Email</p>
-                    <div className="form-field" />
+                    <input type="text" name="email" className="form-field" onChange={(e) => {
+                        this.state.email = e.target.value;
+                    }} />
                 </div>
                 <div className="question-bar">
                     <p className="question-title">Password</p>
-                    <div className="form-field" />
+                    <input type="text" name="password" className="form-field" onChange={(e) => {
+                        this.state.password = e.target.value;
+                    }} />
                 </div>
 
-                <button className="button-border">
-                    <Link to="/SignUpPage" className="button-text">
-                        Sign Up
-                    </Link>
-                </button>
+                <Link to="/SignUpPage" className="link">
+                    <button className="button-border" onClick={() => submitVendorInformation(this.state)}>
+                        <p className="button-text">Sign Up</p>
+                    </button>
+                </Link>
 
             </div>
         );

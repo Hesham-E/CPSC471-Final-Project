@@ -22,36 +22,41 @@ import LoginPage from "./components/LoginPage";
 const USERS = [
   {
     id: "e1",
+    firstname: "Etienne",
+    lastname: "Lagace",
+    email: "etienne.lagace@shaw.ca",
     username: "EtienneL",
+    displayname: "Etienne Lagace",
     password: "chocolate",
-  },
-  {
-    id: "e2",
-    username: "HeshamE",
-    password: "mayo",
-  },
-  {
-    id: "e3",
-    username: "AngelinaR",
-    password: "computer",
   },
 ];
 
 const App = () => {
   const [authenticate, setAuthenticate] = useState(false);
+  const [userList, setUserList] = useState(USERS);
   const [targetUser, setTargetUser] = useState("");
 
   const logInHandler = (username, password) => {
-    USERS.forEach((item) => {
+    userList.forEach((item) => {
       if (username === item.username && password === item.password) {
         setAuthenticate(true);
-        setTargetUser(username);
+        setTargetUser(item.displayname);
       }
     });
   };
 
   const logOutHandler = () => {
     setAuthenticate(false);
+  };
+
+  const signUpHandler = (newUser) => {
+    setUserList((prevState) => {
+      return [newUser, ...prevState];
+    });
+
+    setAuthenticate(true);
+    setTargetUser(newUser.displayname);
+    console.log(userList);
   };
 
   return (
@@ -90,7 +95,7 @@ const App = () => {
             element={
               <div>
                 <Header title="Sign Up" />
-                <UserSignUpPage />
+                <UserSignUpPage newUser={signUpHandler} />
               </div>
             }
           />

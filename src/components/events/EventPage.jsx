@@ -11,8 +11,8 @@ const EventPage = () => {
       <div className={styles.mainDiv}>
         <div className={styles.alignDiv}>
           <span className={styles.text1}>Event</span>
-          <button className="button-border">
-            <Link to="/account" className="button-text">
+          <button className="div1">
+            <Link to="/account" className="button1">
               Return
             </Link>
           </button>

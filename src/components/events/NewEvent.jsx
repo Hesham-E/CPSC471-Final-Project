@@ -56,7 +56,7 @@ const NewEvent = (props) => {
       Date: enteredDate,
       Event_Name: enteredName,
       Duration: enteredTime,
-      Account_Creator: props.user.ID,
+      Account_Creator: "1",
       Event_Location: [enteredLocation],
       Type: enteredType,
       User_ID_invited: [enteredInvite],
@@ -66,7 +66,7 @@ const NewEvent = (props) => {
 
   return (
     <div>
-      <Header />
+      <Header user={props.user} />
       <div className="user-sign-up">
         <div className="background-rectangle" />
         <div className="question-bar">

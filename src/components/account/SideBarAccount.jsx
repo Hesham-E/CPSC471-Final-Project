@@ -6,7 +6,7 @@ const SideBar = (props) => {
   return (
     <div className={styles.sideBar}>
       <Link to="/account" className={styles.navLinks}>
-        Account Settings
+        Account Page
       </Link>
       <Link to="/account/eventList" className={styles.navLinks}>
         Events

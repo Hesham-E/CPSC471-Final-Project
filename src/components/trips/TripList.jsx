@@ -4,10 +4,10 @@ import TripCard from "./TripCard";
 import { Link } from "react-router-dom";
 import styles from "./TripList.module.css";
 
-const TripList = () => {
+const TripList = (props) => {
   return (
     <div>
-      <Header />
+      <Header user={props.user} />
       <div className={styles.mainDiv}>
         <div className={styles.alignDiv}>
           <span className={styles.text1}>Trip List</span>
@@ -17,11 +17,9 @@ const TripList = () => {
             </Link>
           </button>
         </div>
-        <TripCard />
-        <TripCard />
-        <TripCard />
-        <TripCard />
-        <TripCard />
+        {props.trips.map((item) => (
+          <TripCard trip={item} targetTrip={props.targetTrip} />
+        ))}
       </div>
     </div>
   );

@@ -6,11 +6,16 @@ const AccountBody = (props) => {
   return (
     <div className={styles.body}>
       <p className={styles.text1}>Past Actions</p>
-      {props.events.map((item) => (
-        <EventCard event={item} />
-      ))}
-      <TripCard />
-      <TripCard />
+      <div>
+        {props.events.map((item) => (
+          <EventCard event={item} />
+        ))}
+      </div>
+      {/* <div>
+        {props.trips.map((item) => (
+          <TripCard trip={item} />
+        ))}
+      </div> */}
     </div>
   );
 };

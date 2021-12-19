@@ -4,10 +4,10 @@ import EventCard from "../events/EventCard";
 import { Link } from "react-router-dom";
 import styles from "./TripPage.module.css";
 
-const TripPage = () => {
+const TripPage = (props) => {
   return (
     <div>
-      <Header />
+      <Header user={props.user} />
       <div className={styles.mainDiv}>
         <div className={styles.alignDiv}>
           <span className={styles.text1}>Trip Events List</span>
@@ -17,10 +17,9 @@ const TripPage = () => {
             </Link>
           </button>
         </div>
-        {/* <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard /> */}
+        {props.events.map((item) => (
+          <EventCard event={item} targetEvent={props.targetEvent} />
+        ))}
       </div>
     </div>
   );

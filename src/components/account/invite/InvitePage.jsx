@@ -2,10 +2,10 @@ import Header from "../HeaderAccount";
 import Body from "./InviteBody";
 // import styles from "./InvitePage.module.css";
 
-const InvitePage = () => {
+const InvitePage = (props) => {
   return (
     <div>
-      <Header />
+      <Header user={props.user} />
       <Body />
     </div>
   );

@@ -11,7 +11,7 @@ const HeaderAccount = (props) => {
         className={styles.overlay}
         style={{ backgroundImage: `url(${travelPicture})` }}
       >
-        <span className={styles.title}>{props.title}</span>
+        <span className={styles.title}>{props.user.Display_Name}</span>
       </div>
     </div>
   );

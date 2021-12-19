@@ -5,18 +5,9 @@ import { Link } from "react-router-dom";
 import styles from "./EventList.module.css";
 
 const EventList = (props) => {
-  // const [eventList, setEventList] = useState([]);
-  // useEffect(() => {
-  //   props.events.forEach((item) => {
-  //     setEventList((prevState) => {
-  //       return [<EventCard event={item} />, ...prevState];
-  //     });
-  //   });
-  // });
-
   return (
     <div>
-      <Header title="Event List" />
+      <Header title="Event List" user={props.user} />
       <div className={styles.mainDiv}>
         <div className={styles.alignDiv}>
           <span className={styles.text1}>Event List</span>
@@ -27,7 +18,7 @@ const EventList = (props) => {
           </button>
         </div>
         {props.events.map((item) => (
-          <EventCard event={item} />
+          <EventCard event={item} targetEvent={props.targetEvent} />
         ))}
       </div>
     </div>

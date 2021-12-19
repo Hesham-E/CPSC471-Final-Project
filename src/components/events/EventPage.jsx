@@ -4,10 +4,10 @@ import Event from "./EventDesc";
 import { Link } from "react-router-dom";
 import styles from "./EventPage.module.css";
 
-const EventPage = () => {
+const EventPage = (props) => {
   return (
     <div>
-      <Header />
+      <Header user={props.user} />
       <div className={styles.mainDiv}>
         <div className={styles.alignDiv}>
           <span className={styles.text1}>Event</span>
@@ -17,7 +17,7 @@ const EventPage = () => {
             </Link>
           </button>
         </div>
-        <Event />
+        <Event event={props.event} />
       </div>
     </div>
   );

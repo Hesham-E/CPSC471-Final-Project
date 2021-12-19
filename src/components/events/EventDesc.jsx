@@ -1,10 +1,10 @@
 import styles from "./EventDesc.module.css";
 
-const EventDesc = () => {
+const EventDesc = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.div1}>
-        <span className="span-1">Name: Tempor</span>
+        <span className="span-1">{"Name: " + props.event.Event_Name}</span>
         <span className="span-2">Event_ID: 324169</span>
       </div>
       <span className="span-3">

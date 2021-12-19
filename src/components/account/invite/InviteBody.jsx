@@ -1,4 +1,5 @@
-import Button from "../../parts/Button";
+import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./InviteBody.module.css";
 
 const InviteBody = () => {
@@ -6,8 +7,11 @@ const InviteBody = () => {
     <div className={styles.div3}>
       <span className={styles.text1}>Enter Event or Trip ID</span>
       <div className={styles.inputBox} />
-      <Button />
-      <Button />
+      <button className="button-border">
+        <Link to="/account" className="button-text">
+          Register
+        </Link>
+      </button>
     </div>
   );
 };

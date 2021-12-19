@@ -1,5 +1,6 @@
+import React from "react";
 import Header from "../account/HeaderAccount";
-import Button from "../parts/Button";
+import { Link } from "react-router-dom";
 import "./NewTrip.css";
 
 const NewTrip = () => {
@@ -37,7 +38,11 @@ const NewTrip = () => {
           <div className="form-field-trueorfalse" />
         </div>
 
-        <Button className="button-button" />
+        <button className="button-border">
+          <Link to="/account" className="button-text">
+            Add Trip
+          </Link>
+        </button>
       </div>
     </div>
   );

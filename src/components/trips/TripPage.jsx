@@ -1,6 +1,7 @@
+import React from "react";
 import Header from "../account/HeaderAccount";
 import EventCard from "../events/EventCard";
-import Button from "../parts/Button";
+import { Link } from "react-router-dom";
 import styles from "./TripPage.module.css";
 
 const TripPage = () => {
@@ -10,12 +11,16 @@ const TripPage = () => {
       <div className={styles.mainDiv}>
         <div className={styles.alignDiv}>
           <span className={styles.text1}>Trip Events List</span>
-          <Button />
+          <button className="button-border">
+            <Link to="/account" className="button-text">
+              Return
+            </Link>
+          </button>
         </div>
+        {/* <EventCard />
         <EventCard />
         <EventCard />
-        <EventCard />
-        <EventCard />
+        <EventCard /> */}
       </div>
     </div>
   );

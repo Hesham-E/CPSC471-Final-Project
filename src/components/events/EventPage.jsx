@@ -1,6 +1,7 @@
+import React from "react";
 import Header from "../account/HeaderAccount";
 import Event from "./EventDesc";
-import Button from "../parts/Button";
+import { Link } from "react-router-dom";
 import styles from "./EventPage.module.css";
 
 const EventPage = () => {
@@ -10,7 +11,11 @@ const EventPage = () => {
       <div className={styles.mainDiv}>
         <div className={styles.alignDiv}>
           <span className={styles.text1}>Event</span>
-          <Button />
+          <button className="button-border">
+            <Link to="/account" className="button-text">
+              Return
+            </Link>
+          </button>
         </div>
         <Event />
       </div>

@@ -23,3 +23,21 @@
   height: 30px;
   background: rgb(204, 207, 204);
 }
+
+.button-border {
+  margin: auto;
+  border-radius: 42.5px;
+  height: 85px;
+  width: 100%;
+  background-color: #e9c46a;
+}
+
+.button-text {
+  text-align: center;
+  vertical-align: top;
+  font-size: 46px;
+  font-family: Roboto;
+  line-height: auto;
+  color: #000000;
+  text-decoration: none;
+}

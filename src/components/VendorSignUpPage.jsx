@@ -25,14 +25,14 @@ const VendorSignUpPage = (props) => {
     setEnteredPassword(event.target.value);
   };
 
-  // const submitVendorInformation = () => {
-  //   Axios.post("http://localhost:3001/api/vendor", {
-  //     vendorName: enteredOrgName,
-  //     userName: enteredUserName,
-  //     email: enteredEmail,
-  //     password: enteredPassword,
-  //   }).then(() => {});
-  // };
+  const submitVendorInformation = () => {
+    Axios.post("http://localhost:3001/api/vendor", {
+      vendorName: enteredOrgName,
+      userName: enteredUserName,
+      email: enteredEmail,
+      password: enteredPassword,
+    }).then(() => {});
+  };
 
   const signUp = () => {
     const user = {
@@ -42,7 +42,7 @@ const VendorSignUpPage = (props) => {
       Password: enteredPassword,
       Type: "vendor",
     };
-    // submitVendorInformation();
+    submitVendorInformation();
     props.newUser(user);
   };
 

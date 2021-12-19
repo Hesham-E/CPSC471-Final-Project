@@ -35,16 +35,16 @@ const UserSignUpPage = (props) => {
     setEnteredPassword(event.target.value);
   };
 
-  // const submitUserInformation = () => {
-  //   Axios.post("http://localhost:3001/api/users", {
-  //     displayName:  enteredDisplayName,
-  //     firstName: enteredFirstName,
-  //     lastName: enteredLastName,
-  //     userName: enteredUserName,
-  //     email: enteredEmail,
-  //     password: enteredPassword,
-  //   }).then(() => {});
-  // };
+  const submitUserInformation = () => {
+    Axios.post("http://localhost:3001/api/users", {
+      displayName: enteredDisplayName,
+      firstName: enteredFirstName,
+      lastName: enteredLastName,
+      userName: enteredUserName,
+      email: enteredEmail,
+      password: enteredPassword,
+    }).then(() => {});
+  };
 
   const signUp = () => {
     const user = {
@@ -56,7 +56,7 @@ const UserSignUpPage = (props) => {
       Password: enteredPassword,
       Type: "user",
     };
-    // submitUserInformation();
+    submitUserInformation();
     props.newUser(user);
   };
 

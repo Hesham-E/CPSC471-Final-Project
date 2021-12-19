@@ -107,10 +107,10 @@ CREATE TABLE `event` (
   `Event_Name` varchar(100) DEFAULT NULL,
   `Duration` int DEFAULT NULL,
   `Account_Creator` int NOT NULL,
+  `Type` varchar(100) NOT NULL,
   PRIMARY KEY (`Event_ID`),
   KEY `FK_Event_Account` (`Account_Creator`),
-  CONSTRAINT `FK_Event_Account` FOREIGN KEY (`Account_Creator`) REFERENCES `account` (`ID`),
-  CONSTRAINT `FK_Event_Ticket_Event_Information` FOREIGN KEY (`Event_ID`) REFERENCES `ticket_event_information` (`Event_ID`)
+  CONSTRAINT `FK_Event_Account` FOREIGN KEY (`Account_Creator`) REFERENCES `account` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -656,8 +656,8 @@ CREATE TABLE `vehicle_trip_uses` (
   `Vehicle_ID` int NOT NULL,
   `Start_Location` varchar(100) NOT NULL,
   `End_Location` varchar(100) NOT NULL,
-  `Start_Time` datetime(6) NOT NULL,
-  `End_Time` datetime(6) NOT NULL,
+  `Start_Time` varchar(6) NOT NULL,
+  `End_Time` varchar(6) NOT NULL,
   PRIMARY KEY (`Trip_ID`,`Vehicle_ID`),
   KEY `FK_Vehicle_Trip_Uses_Vehicle` (`Vehicle_ID`),
   CONSTRAINT `FK_Vehicle_Trip_Uses_Trip` FOREIGN KEY (`Trip_ID`) REFERENCES `trip` (`Trip_ID`),

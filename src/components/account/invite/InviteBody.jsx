@@ -7,8 +7,8 @@ const InviteBody = () => {
     <div className={styles.div3}>
       <span className={styles.text1}>Enter Event or Trip ID</span>
       <div className={styles.inputBox} />
-      <button className="button-border">
-        <Link to="/account" className="button-text">
+      <button className="div1">
+        <Link to="/account" className="button1">
           Register
         </Link>
       </button>

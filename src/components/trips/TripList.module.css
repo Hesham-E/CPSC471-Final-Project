@@ -26,20 +26,19 @@
   color: white;
 }
 
-.button-border {
-  margin: auto;
-  border-radius: 42.5px;
-  height: 85px;
-  width: 100%;
-  background-color: #e9c46a;
+.button1 {
+  display: flex;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Roboto";
+  line-height: 33spx;
+  justify-content: center;
 }
 
-.button-text {
-  text-align: center;
-  vertical-align: top;
-  font-size: 46px;
-  font-family: Roboto;
-  line-height: auto;
-  color: #000000;
-  text-decoration: none;
+.div1 {
+  border-radius: 42px;
+  background: #e9c46a;
+  padding: 9px 4px;
+  width: 150px;
+  height: 50px;
 }

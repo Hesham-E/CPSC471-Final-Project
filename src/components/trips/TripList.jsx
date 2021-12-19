@@ -11,8 +11,8 @@ const TripList = () => {
       <div className={styles.mainDiv}>
         <div className={styles.alignDiv}>
           <span className={styles.text1}>Trip List</span>
-          <button className="button-border">
-            <Link to="/account" className="button-text">
+          <button className={styles.div1}>
+            <Link to="/account/newTrip" className={styles.button1}>
               Add Trip
             </Link>
           </button>

@@ -39,7 +39,7 @@ const NewTrip = () => {
         </div>
 
         <button className="button-border">
-          <Link to="/account" className="button-text">
+          <Link to="/account/tripList" className="button-text">
             Add Trip
           </Link>
         </button>

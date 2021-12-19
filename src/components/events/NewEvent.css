@@ -11,12 +11,6 @@
   justify-content: flex-start;
   height: 100%;
 }
-.question-bar {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 100%;
-}
 .form-field {
   margin: auto;
   height: 49px;
@@ -28,14 +22,6 @@
   height: 49px;
   width: 5%;
   background-color: #31dec9;
-}
-.question-title {
-  text-align: center;
-  vertical-align: top;
-  font-size: 36px;
-  font-family: Roboto;
-  line-height: auto;
-  color: #ffffff;
 }
 .button-border {
   margin: auto;
@@ -52,4 +38,29 @@
   line-height: auto;
   color: #000000;
   text-decoration: none;
+}
+.question-bar {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+}
+
+.question-bar label {
+  text-align: center;
+  vertical-align: top;
+  font-size: 36px;
+  font-family: Roboto;
+  line-height: auto;
+  color: #ffffff;
+}
+
+.question-bar input {
+  align-self: center;
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
 }

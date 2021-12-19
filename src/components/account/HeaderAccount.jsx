@@ -1,18 +1,17 @@
+import React from "react";
 import SideBar from "./SideBarAccount";
 import styles from "./HeaderAccount.module.css";
 import travelPicture from "../../pictures/travel.png";
 
 const HeaderAccount = (props) => {
   return (
-    <div className={styles.head}>
+    <div className={styles.head} on>
+      <SideBar logout={props.logout} />
       <div
         className={styles.overlay}
         style={{ backgroundImage: `url(${travelPicture})` }}
       >
-        <div className={styles.header}>
-          <SideBar logout={props.logout} />
-          <span className={styles.title}>{props.user}</span>
-        </div>
+        <span className={styles.title}>{props.title}</span>
       </div>
     </div>
   );

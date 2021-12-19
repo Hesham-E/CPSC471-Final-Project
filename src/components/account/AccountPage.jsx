@@ -6,7 +6,7 @@ const AccountPage = (props) => {
   return (
     <div className={styles.body}>
       <Header user={props.user} logout={props.logout} />
-      <Body />
+      <Body events={props.events} />
     </div>
   );
 };

@@ -18,7 +18,7 @@ import SignUpPage from "./components/SignUpPage";
 import UserSignUpPage from "./components/UserSignUpPage";
 import VendorSignUpPage from "./components/VendorSignUpPage";
 import LoginPage from "./components/LoginPage";
-import Axios from 'axios';
+import Axios from "axios";
 
 const USERS = [
   {
@@ -26,16 +26,16 @@ const USERS = [
     First_Name: "Etienne",
     Last_Name: "Lagace",
     Email: "etienne.lagace@shaw.ca",
-    Username: "EtienneL",
+    Username: "e",
     Display_Name: "Etienne Lagace",
-    Password: "chocolate",
+    Password: "c",
     Type: "user",
   },
   {
     ID: "2",
     Vendor_Name: "THE organization",
     Email: "coolio@gmail.com",
-    Username: "Habibi", 
+    Username: "Habibi",
     Password: "boo",
     Type: "vendor",
   },
@@ -46,14 +46,10 @@ const EVENTS = [
     Event_ID: "312234",
     Event_Description: "This event is the coolest event",
     Date: "2022-02-14",
-    Event_Name: "Valentine's Day", 
+    Event_Name: "Valentine's Day",
     Duration: "6",
     Account_Creator: "1",
-    Event_Location: [
-      "Calgary", 
-      "Edmonton", 
-      "Vancouver",
-    ],
+    Event_Location: ["Calgary", "Edmonton", "Vancouver"],
     Type: "private",
     Participants: [
       "etienne.cool@gmail.com",
@@ -63,16 +59,17 @@ const EVENTS = [
   },
   {
     Event_ID: "234512",
-    Event_Description: "It's Christmas time again so be good or you will be put on the naughty list",
+    Event_Description:
+      "It's Christmas time again so be good or you will be put on the naughty list",
     Date: "2021-12-25",
-    Event_Name: "Jesus Christ is Born", 
+    Event_Name: "Jesus Christ is Born",
     Duration: "24",
     Account_Creator: "1",
     Event_Location: [
-      "Calgary", 
-      "Edmonton", 
+      "Calgary",
+      "Edmonton",
       "Vancouver",
-      "Toronto", 
+      "Toronto",
       "New York",
       "Montreal",
     ],
@@ -83,36 +80,41 @@ const EVENTS = [
       "tree.coolest@gmail.com",
     ],
   },
-]
+];
 
 const App = () => {
-  const [authenticate, setAuthenticate] = useState(false);
+  // will need to change this
+  const [authenticate, setAuthenticate] = useState(true);
   const [userList, setUserList] = useState(USERS);
-  const [targetUser, setTargetUser] = useState("");
+  const [eventList, setEventList] = useState(EVENTS);
+  const [targetUser, setTargetUser] = useState(userList[0]);
 
   const logInHandler = (username, password) => {
     setUserList(); //comment this out if you want to use the test accounts
-    Axios.get("http://localhost:3001/api/account/users", {}).then((response) => {
+    Axios.get("http://localhost:3001/api/account/users", {}).then(
+      (response) => {
         response.data.forEach((item) => {
           item.Type = "user";
-        })
+        });
 
         setUserList([...userList, ...response.data]);
-    });
+      }
+    );
 
-    Axios.get("http://localhost:3001/api/account/vendors", {}).then((response) => {
-      response.data.forEach((item) => {
-        item.Type = "vendor";
-      })
+    Axios.get("http://localhost:3001/api/account/vendors", {}).then(
+      (response) => {
+        response.data.forEach((item) => {
+          item.Type = "vendor";
+        });
 
-      setUserList([...userList, ...response.data]);
-    });
-
+        setUserList([...userList, ...response.data]);
+      }
+    );
 
     userList.forEach((item) => {
       if (username === item.Username && password === item.Password) {
         setAuthenticate(true);
-        setTargetUser(item.Display_Name);
+        setTargetUser(item);
       }
     });
   };
@@ -127,8 +129,15 @@ const App = () => {
     });
 
     setAuthenticate(true);
-    setTargetUser(newUser.displayname);
+    setTargetUser(newUser);
     console.log(userList);
+  };
+
+  const addEventHandler = (newEvent) => {
+    setEventList((prevState) => {
+      return [newEvent, ...prevState];
+    });
+    console.log(newEvent);
   };
 
   return (
@@ -193,7 +202,13 @@ const App = () => {
           {authenticate && (
             <Route
               path="/account/*"
-              element={<AccountPage user={targetUser} logout={logOutHandler} />}
+              element={
+                <AccountPage
+                  user={targetUser}
+                  events={eventList}
+                  logout={logOutHandler}
+                />
+              }
             />
           )}
           {authenticate && (
@@ -201,10 +216,18 @@ const App = () => {
           )}
           {authenticate && <Route path="/account/event" element={<Event />} />}
           {authenticate && (
-            <Route path="/account/eventList" element={<EventList />} />
+            <Route
+              path="/account/eventList"
+              element={<EventList events={eventList} />}
+            />
           )}
           {authenticate && (
-            <Route path="/account/newEvent" element={<NewEvent />} />
+            <Route
+              path="/account/newEvent"
+              element={
+                <NewEvent addEvent={addEventHandler} user={targetUser} />
+              }
+            />
           )}
           {authenticate && <Route path="/account/trip" element={<Trip />} />}
           {authenticate && (

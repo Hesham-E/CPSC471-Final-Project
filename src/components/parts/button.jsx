@@ -1,10 +1,14 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Button.module.css";
 
-const Button = () => {
+const Button = (props) => {
   return (
-    <div className={styles.div1}>
-      <span className={styles.button1}>Button</span>
-    </div>
+    <button className={styles.div1}>
+      <Link to="/account/newEvent" className={styles.button1}>
+        {props.name}
+      </Link>
+    </button>
   );
 };
 
